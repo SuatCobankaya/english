@@ -5,9 +5,9 @@ from cumle import cumlepencere
 from dosya import dosyapencere
 from eslestir import eslestirpencere
 from istatislik import istatislikpencere
-from flashcardtekrar import flashcardtekrarpencere
+from flashcard import flashcardpencere
 from test import testpencere
-from yenikelime import yenikelimepencere
+from veritabani import database
 
 # Global tema değişkeni
 global current_theme
@@ -55,7 +55,26 @@ def apply_theme(window):
 class anapencere(QMainWindow):  
     def __init__(self):
         super().__init__()
+        self.db = database()
+
+        self.db.baglantiac()
+        self.db.cursor.execute("SELECT kelime, anlam FROM random20")
+        self.sayi = self.db.cursor.fetchall()
+        self.db.baglantikapat()
+
+        if len(self.sayi) == 16:
+            self.kelimeler = self.sayi
+        else:
+            self.kelimeler = self.db.randomtüm(16)
+            self.db.baglantiac()
+            for kelime, anlam in self.kelimeler:
+                self.db.cursor.execute("INSERT INTO random20 (kelime, anlam) VALUES (?, ?)", (kelime, anlam))
+            self.db.con.commit()
+            self.db.baglantikapat()
+
+
         self.ana_pencere = Ui_MainWindow()
+        
         self.ana_pencere.setupUi(self)
         self.ana_pencere.pushButton_ara.clicked.connect(self.ara)
         self.ana_pencere.pushButton_cumle.clicked.connect(self.cumle)
@@ -63,66 +82,66 @@ class anapencere(QMainWindow):
         self.ana_pencere.pushButton_eslestirme.clicked.connect(self.eslestir)
         self.ana_pencere.pushButton_istatislik.clicked.connect(self.istatislik)
         self.ana_pencere.pushButton_kart.clicked.connect(self.kart)
-        self.ana_pencere.pushButton_kaydet.clicked.connect(self.kaydet)
+        self.ana_pencere.pushButton_kaydet.clicked.connect(self.yenile)
         self.ana_pencere.pushButton_test.clicked.connect(self.test)
-        self.ana_pencere.pushButton_yenikelime.clicked.connect(self.yenikelime)
         self.ana_pencere.actionDark.triggered.connect(self.darkmode)
         self.ana_pencere.actionWhite.triggered.connect(self.whitemode)
         self.setCentralWidget(self.ana_pencere.centralwidget)
+        self.showMaximized()
         
         # Başlangıçta global temayı uygula
         apply_theme(self)
 
     def ara(self):
-        self.close()
+        self.hide()
         self.araac = arapencere()
         apply_theme(self.araac)
         self.araac.show()
 
     def cumle(self):
-        self.close()
-        self.cumleac = cumlepencere()
+        self.hide()
+        self.cumleac = cumlepencere(self.kelimeler)
         apply_theme(self.cumleac)
         self.cumleac.show()
 
     def dosya(self):
-        self.close()
+        self.hide()
         self.dosyaac = dosyapencere()
         apply_theme(self.dosyaac)
         self.dosyaac.show()
 
     def eslestir(self):
-        self.close()
-        self.eslestirac = eslestirpencere()
+        self.hide()
+        self.eslestirac = eslestirpencere(self.kelimeler)
         apply_theme(self.eslestirac)
         self.eslestirac.show()
 
     def istatislik(self):
-        self.close()
+        self.hide()
         self.istatislikac = istatislikpencere()
         apply_theme(self.istatislikac)
         self.istatislikac.show()
 
     def kart(self):
-        self.close()
-        self.kartac = flashcardtekrarpencere()
+        self.hide()
+        self.kartac = flashcardpencere(self.kelimeler)
         apply_theme(self.kartac)
         self.kartac.show()
 
     def test(self):
-        self.close()
-        self.testac = testpencere()
+        self.hide()
+        self.testac = testpencere(self.kelimeler)
         apply_theme(self.testac)
         self.testac.show()
 
-    def yenikelime(self):
-        self.close()
-        self.yenikelimeac = yenikelimepencere()
-        apply_theme(self.yenikelimeac)
-        self.yenikelimeac.show()
-
-    def kaydet(self):
-        pass
+    def yenile(self):
+        self.kelimeler = self.db.randomtüm(16)
+        self.db.baglantiac()
+        self.db.cursor.execute("DELETE FROM random20")
+        for kelime, anlam in self.kelimeler:
+                self.db.cursor.execute("INSERT INTO random20 (kelime, anlam) VALUES (?, ?)", (kelime, anlam))
+        self.db.con.commit()
+        self.db.baglantikapat()
 
     def darkmode(self):
         global current_theme
@@ -133,6 +152,13 @@ class anapencere(QMainWindow):
         global current_theme
         current_theme = "white"
         apply_theme(self)
+        
+    def closeEvent(self, event):
+        self.db.baglantiac()
+        self.db.cursor.execute("DELETE FROM random20")
+        self.db.con.commit()
+        self.db.baglantikapat()
+        event.accept()
 
 if __name__ == "__main__":
     app = QApplication([])

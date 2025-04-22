@@ -103,17 +103,16 @@ class dosyapencere(QMainWindow):
     def learn_file(self,filename):
         sayi, ok = QInputDialog.getText(self, "kalime sayisi", "kelime sayisi girin:")
         sinir = self.db.tekrarvarmi(filename)
+        id = self.db.dosyaidgetir(filename)
         if ok:
          try:
             kelime_sayisi = int(sayi) 
-            if kelime_sayisi>=8 and sinir>=kelime_sayisi:
-               from flashcard import flashcardpencere
-               self.giris = flashcardpencere()
-               #self.giris.kelimesayisi(kelime_sayisi)
+            if sinir>=kelime_sayisi:
+               kelimeler = self.db.randomyeni(id,kelime_sayisi)
+               from flashcardtekrar import flashcardtekrarpencere
+               self.giris = flashcardtekrarpencere(kelimeler)
                self.giris.show()
                self.close()
-            elif kelime_sayisi<8:
-               QMessageBox.warning(self, "Hata", "minimum kelime sayisi 8 dir!")
             else:
                QMessageBox.warning(self, "Hata", "maksimum kelime sayisi " + str(sinir) + " dir") 
          except ValueError:
@@ -123,17 +122,16 @@ class dosyapencere(QMainWindow):
     def tekrar_file(self,filename):
         sayi, ok = QInputDialog.getText(self, "kalime sayisi", "kelime sayisi girin:")
         sinir = self.db.kelimevarmi(filename)
+        id = self.db.dosyaidgetir(filename)
         if ok:
          try:
             kelime_sayisi = int(sayi) 
-            if kelime_sayisi>=8 and sinir>=kelime_sayisi:
+            if sinir>=kelime_sayisi:
+               kelimeler = self.db.randomtekrar(id,kelime_sayisi)
                from flashcard import flashcardpencere
-               #self.giris.kelimesayisi(kelime_sayisi)
-               self.giris = flashcardpencere()
+               self.giris = flashcardpencere(kelimeler)
                self.giris.show()
                self.close()
-            elif kelime_sayisi<8:
-               QMessageBox.warning(self, "Hata", "minimum kelime sayisi 8 dir!")
             else:
                QMessageBox.warning(self, "Hata", "maksimum kelime sayisi " + str(sinir) + " dir") 
          except ValueError:

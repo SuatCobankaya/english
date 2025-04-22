@@ -16,15 +16,14 @@ class dosyaicipencere(QMainWindow):
         self.dosyaici_pencere.pushButton_kaydet.clicked.connect(self.kaydet)
         self.dosyaici_pencere.pushButton_yeni.clicked.connect(self.yeni)
         self.dosyaici_pencere.pushButton_goruntule.clicked.connect(self.goruntule)
-
         self.setCentralWidget(self.dosyaici_pencere.centralwidget) 
         apply_theme(self)
     def dosyaismial(self,isim):
         self.filename = isim
         self.kelimeleriyukle()
-    def kelimeleriyukle(self):
+    def kelimeleriyukle(self, zorluk = None):
         id = self.db.dosyaidgetir(self.filename)
-        kelimeler = self.db.kelimelerigetir(id)
+        kelimeler = self.db.kelimelerigetir(id,zorluk)
         self.dosyaici_pencere.lineEdit_dosya.setText(self.filename)
         for i in reversed(range(self.dosyaici_pencere.gridLayout.count())):
             self.dosyaici_pencere.gridLayout.itemAt(i).widget().setParent(None)
@@ -122,4 +121,20 @@ class dosyaicipencere(QMainWindow):
     def yeni(self):
         self.dosyaici_pencere.yenikelime()
     def goruntule(self):
-        pass
+        self.zorluk = []
+        if self.dosyaici_pencere.checkBox_hepsi.isChecked():
+            self.kelimeleriyukle()
+        else:
+            if self.dosyaici_pencere.checkBox_biliyom.isChecked():
+                self.zorluk.append(1)
+            else:
+                self.zorluk.append(999)
+            if self.dosyaici_pencere.checkBox_orta.isChecked():
+                self.zorluk.append(2)
+            else:
+                self.zorluk.append(999)
+            if self.dosyaici_pencere.checkBox_bilmiyom.isChecked():
+                self.zorluk.append(3)
+            else:
+                self.zorluk.append(999)
+            self.kelimeleriyukle(self.zorluk)

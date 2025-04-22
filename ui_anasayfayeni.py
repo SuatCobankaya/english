@@ -66,17 +66,6 @@ class Ui_MainWindow(object):
         self.pushButton_ara.setObjectName("pushButton_ara")
         self.horizontalLayout.addWidget(self.pushButton_ara)
         
-        self.pushButton_yenikelime = QtWidgets.QPushButton(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_yenikelime.sizePolicy().hasHeightForWidth())
-        self.pushButton_yenikelime.setSizePolicy(sizePolicy)
-        self.pushButton_yenikelime.setFont(top_button_font)  # Fontu uygula
-        self.pushButton_yenikelime.setDefault(True)
-        self.pushButton_yenikelime.setObjectName("pushButton_yenikelime")
-        self.horizontalLayout.addWidget(self.pushButton_yenikelime)
-        
         # Butonları ortalamak için boşluk ekle
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
@@ -163,6 +152,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         
         MainWindow.setCentralWidget(self.centralwidget)
+        
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 37))
         self.menubar.setObjectName("menubar")
@@ -192,13 +182,12 @@ class Ui_MainWindow(object):
         self.pushButton_dosya.setText(_translate("MainWindow", "Dosya"))
         self.pushButton_istatislik.setText(_translate("MainWindow", "İstatislik"))
         self.pushButton_ara.setText(_translate("MainWindow", "Ara"))
-        self.pushButton_yenikelime.setText(_translate("MainWindow", "Yeni Kelime"))
-        self.label.setText(_translate("MainWindow", "Gunluk Gorevler"))
+        self.label.setText(_translate("MainWindow", "Günlük Görevler"))
         self.pushButton_cumle.setText(_translate("MainWindow", "Cümle Oluşturma"))
         self.pushButton_eslestirme.setText(_translate("MainWindow", "Eşleştirme"))
         self.pushButton_kart.setText(_translate("MainWindow", "Kelime Kartları"))
         self.pushButton_test.setText(_translate("MainWindow", "Test"))
-        self.pushButton_kaydet.setText(_translate("MainWindow", "Kaydet"))
+        self.pushButton_kaydet.setText(_translate("MainWindow", "Kelimeleri Yenile"))
         self.menuAyarlar.setTitle(_translate("MainWindow", "Ayarlar"))
         self.menuDark_mode.setTitle(_translate("MainWindow", "Tema"))
         self.actionWhite.setText(_translate("MainWindow", "White"))

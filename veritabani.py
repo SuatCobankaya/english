@@ -18,10 +18,14 @@ class database():
          anlamlar = self.cursor.fetchall()
          self.baglantikapat()
          return [row[0] for row in anlamlar]
-    def kelimelerigetir(self,a):
+    def kelimelerigetir(self,a,zorluk=None):
          self.baglantiac()
-         self.cursor.execute("SELECT EnglishWord, Meaning, ExampleSentences FROM WORDS WHERE FileId = ?", (a,))
-         kelimeler = self.cursor.fetchall()
+         if zorluk == None:
+             self.cursor.execute("SELECT EnglishWord, Meaning, ExampleSentences FROM WORDS WHERE FileId = ?", (a,))
+             kelimeler = self.cursor.fetchall()
+         else:
+             self.cursor.execute("SELECT EnglishWord, Meaning, ExampleSentences FROM WORDS WHERE FileId = ? AND zorluk IN (?,?,?)", (a,*zorluk))
+             kelimeler = self.cursor.fetchall()
          self.baglantikapat()
          return kelimeler
     def randomyeni(self,dosyaid,sayi):
@@ -30,10 +34,10 @@ class database():
          rastgele = self.cursor.fetchall()
          self.baglantikapat()
          if len(rastgele) < sayi:
-          return rastgele
+            return rastgele
          else:
-          rastgele = random.sample(rastgele, sayi)
-          return rastgele
+            rastgele = random.sample(rastgele, sayi)
+            return rastgele
     def kelimevarmi(self,dosyaadi):
          db = database()
          dosyaid = db.dosyaidgetir(dosyaadi)
@@ -45,6 +49,30 @@ class database():
          zorluk3 = self.cursor.fetchall()
          sayi3 = len(zorluk3)
          return sayi2+sayi3
+    def randomtüm(self,sayi):
+         self.baglantiac()
+         self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS")
+         rastgele = self.cursor.fetchall()
+         self.baglantikapat()
+         kelimeler = random.sample(rastgele, sayi)
+         return kelimeler
+    def algo(self,zorluk,kelime):
+        self.baglantiac()
+        self.cursor.execute("SELECT tekrar FROM WORDS WHERE EnglishWord = ? ",(kelime,))
+        sayi = self.cursor.fetchone()
+        if sayi is None or sayi[0] is None:
+            tekrar_sayisi = 1
+        else:
+            tekrar_sayisi = sayi[0]+1
+        self.cursor.execute("UPDATE WORDS SET tekrar = ?, zorluk = ? WHERE EnglishWord = ?;",(tekrar_sayisi, zorluk, kelime))
+        self.con.commit()
+        self.baglantikapat()
+    def rastgele3kelimeal(self,kelime):
+        self.baglantiac()
+        self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS WHERE Meaning != ? AND FileId NOT IN (?, ?)",(kelime, 1, 3))
+        tumturkceler = [row[1] for row in self.cursor.fetchall()]
+        self.baglantikapat()
+        return tumturkceler
     def tekrarvarmi(self,dosyaadi):
         db = database()
         dosyaid = db.dosyaidgetir(dosyaadi)
