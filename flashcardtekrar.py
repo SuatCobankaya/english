@@ -30,12 +30,17 @@ class flashcardtekrarpencere(QMainWindow):
         
     def geri(self, ):
         from dosya import dosyapencere
+        from anasayfa import apply_theme
         self.giris = dosyapencere()
+        apply_theme(self.giris)
         self.giris.show()
+        
         self.close() 
     def anasayfa(self, ):
-        from anasayfa import anapencere
+        from anasayfa import anapencere,apply_theme
         self.giris = anapencere()
+        
+        apply_theme(self.giris)
         self.giris.show()
         self.close() 
     def onceki(self,):

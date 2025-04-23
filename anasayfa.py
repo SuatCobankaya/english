@@ -4,7 +4,7 @@ from ara import arapencere
 from cumle import cumlepencere
 from dosya import dosyapencere
 from eslestir import eslestirpencere
-from istatislik import istatislikpencere
+
 from flashcard import flashcardpencere
 from test import testpencere
 from veritabani import database
@@ -117,6 +117,7 @@ class anapencere(QMainWindow):
         self.eslestirac.show()
 
     def istatislik(self):
+        from istatislik import istatislikpencere
         self.hide()
         self.istatislikac = istatislikpencere()
         apply_theme(self.istatislikac)

@@ -4,7 +4,6 @@ from veritabani import database
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 
-
 class dosyapencere(QMainWindow):  
     def __init__(self):
         super().__init__()
@@ -31,6 +30,8 @@ class dosyapencere(QMainWindow):
     def yeni(self, ):
         from yenidosya import yenidosyapencere
         self.giris = yenidosyapencere()
+        from anasayfa import apply_theme
+        apply_theme(self.giris)
         self.giris.show()
         self.close() 
     def sil(self, ):
@@ -63,12 +64,12 @@ class dosyapencere(QMainWindow):
             
 
             view_button = QPushButton("Görüntüle")
-            view_button.setStyleSheet("background-color: #6272a4; color: white; border-radius: 5px; font-size: 14px;")
+            view_button.setStyleSheet("background-color: #6272a4; color: black; border-radius: 5px; font-size: 14px;")
             view_button.setFixedHeight(40)
             view_button.clicked.connect(lambda checked, fname=filename: self.view_file(fname))
 
-            tekrar_button = QPushButton("tekrar")
-            tekrar_button.setStyleSheet("background-color: #6272a4; color: white; border-radius: 5px; font-size: 14px;")
+            tekrar_button = QPushButton("Öğrendiklerini Tekrar Et")
+            tekrar_button.setStyleSheet("background-color: #e88c2b; color: black; border-radius: 5px; font-size: 14px;")
             tekrar_button.setFixedHeight(40)
             tekrar_button.clicked.connect(lambda checked, fname=filename: self.tekrar_file(fname))
 
@@ -97,6 +98,8 @@ class dosyapencere(QMainWindow):
         from dosyaici import dosyaicipencere
         self.giris = dosyaicipencere()
         self.giris.dosyaismial(filename)
+        from anasayfa import apply_theme
+        apply_theme(self.giris)
         self.giris.show()
         self.close()
 
@@ -111,6 +114,8 @@ class dosyapencere(QMainWindow):
                kelimeler = self.db.randomyeni(id,kelime_sayisi)
                from flashcardtekrar import flashcardtekrarpencere
                self.giris = flashcardtekrarpencere(kelimeler)
+               from anasayfa import apply_theme
+               apply_theme(self.giris)
                self.giris.show()
                self.close()
             else:
@@ -130,6 +135,8 @@ class dosyapencere(QMainWindow):
                kelimeler = self.db.randomtekrar(id,kelime_sayisi)
                from flashcard import flashcardpencere
                self.giris = flashcardpencere(kelimeler)
+               from anasayfa import apply_theme
+               apply_theme(self.giris)
                self.giris.show()
                self.close()
             else:

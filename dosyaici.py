@@ -1,9 +1,11 @@
 from PyQt5.QtWidgets import *
-from ui_dosyaiciyeni import Ui_MainWindow
-from anasayfa import apply_theme  # Tema fonksiyonunu import et
-from veritabani import database
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
+from ui_dosyaiciyeni import Ui_MainWindow
+from anasayfa import apply_theme
+from veritabani import database
+from dosya import dosyapencere
+from anasayfa import anapencere
 
 class dosyaicipencere(QMainWindow):  
     def __init__(self):
@@ -11,6 +13,7 @@ class dosyaicipencere(QMainWindow):
         self.dosyaici_pencere = Ui_MainWindow()
         self.dosyaici_pencere.setupUi(self)
         self.db = database()
+
         self.dosyaici_pencere.pushButton_geri.clicked.connect(self.geri)
         self.dosyaici_pencere.pushButton_anasayfa.clicked.connect(self.anasayfa)
         self.dosyaici_pencere.pushButton_kaydet.clicked.connect(self.kaydet)
@@ -18,89 +21,73 @@ class dosyaicipencere(QMainWindow):
         self.dosyaici_pencere.pushButton_goruntule.clicked.connect(self.goruntule)
         self.setCentralWidget(self.dosyaici_pencere.centralwidget) 
         apply_theme(self)
-    def dosyaismial(self,isim):
+
+    def dosyaismial(self, isim):
         self.filename = isim
         self.kelimeleriyukle()
-    def kelimeleriyukle(self, zorluk = None):
+
+    def kelimeleriyukle(self, zorluk=None):
+        self.setUpdatesEnabled(False)  # Arayüz güncellemelerini geçici olarak durdur
         id = self.db.dosyaidgetir(self.filename)
-        kelimeler = self.db.kelimelerigetir(id,zorluk)
+        kelimeler = self.db.kelimelerigetir(id, zorluk)
         self.dosyaici_pencere.lineEdit_dosya.setText(self.filename)
-        for i in reversed(range(self.dosyaici_pencere.gridLayout.count())):
-            self.dosyaici_pencere.gridLayout.itemAt(i).widget().setParent(None)
 
-        kelimebaslik = QLabel("kelime")
-        kelimebaslik.setStyleSheet("background-color: #44475a; color: white; border-radius: 5px;")
-        kelimebaslik.setFixedHeight(40)
-        kelimebaslik.setAlignment(Qt.AlignCenter)
-        font = QFont("Arial", 14) 
-        kelimebaslik.setFont(font)
+        layout = self.dosyaici_pencere.gridLayout
+        for i in reversed(range(layout.count())):
+            item = layout.itemAt(i)
+            if item and item.widget():
+                item.widget().deleteLater()
 
-        anlambaslik = QLabel("anlami")
-        anlambaslik.setStyleSheet("background-color: #44475a; color: white; border-radius: 5px;")
-        anlambaslik.setFixedHeight(40)
-        anlambaslik.setAlignment(Qt.AlignCenter)
-        font = QFont("Arial", 14) 
-        anlambaslik.setFont(font)
+        font = QFont("Arial", 14)
 
-        cumlebaslik = QLabel("ornek cumle")
-        cumlebaslik.setStyleSheet("background-color: #44475a; color: white; border-radius: 5px;")
-        cumlebaslik.setFixedHeight(40)
-        cumlebaslik.setAlignment(Qt.AlignCenter)
-        font = QFont("Arial", 14) 
-        cumlebaslik.setFont(font)
+        headers = ["kelime", "anlami", "ornek cumle"]
+        for idx, text in enumerate(headers):
+            label = QLabel(text)
+            label.setStyleSheet("background-color: #44475a; color: white; border-radius: 5px;")
+            label.setAlignment(Qt.AlignCenter)
+            label.setFont(font)
+            label.setFixedHeight(40)
+            layout.addWidget(label, 0, idx)
 
-        self.dosyaici_pencere.gridLayout.addWidget(kelimebaslik, 0, 0)
-        self.dosyaici_pencere.gridLayout.addWidget(anlambaslik, 0, 1)
-        self.dosyaici_pencere.gridLayout.addWidget(cumlebaslik, 0, 2)
+        for row, kelime in enumerate(kelimeler, start=1):
+            for col, text in enumerate(kelime[:3]):
+                edit = QLineEdit()
+                edit.setText(str(text))
+                edit.setStyleSheet("background-color: #6272a4; color: white; border-radius: 5px; font-size: 14px; padding: 8px;")
+                edit.setFixedHeight(40)
+                layout.addWidget(edit, row, col)
 
-        for i, kelime in enumerate(kelimeler):
-
-            english = kelime[0]
-            meaning = kelime[1]
-            sentence = kelime[2]
-            row = i+1  
-            col1 = 0  
-            col2 = 1  
-            col3 = 2
-            
-            view1_textedit = QTextEdit()
-            view1_textedit.setText(english)
-            view1_textedit.setStyleSheet("background-color: #6272a4; color: white; border-radius: 5px; font-size: 14px; padding: 8px;")
-            view1_textedit.setFixedHeight(60)
-            view1_textedit.setLineWrapMode(QTextEdit.WidgetWidth)
-
-            view2_textedit = QTextEdit()
-            view2_textedit.setText(meaning)
-            view2_textedit.setStyleSheet("background-color: #6272a4; color: white; border-radius: 5px; font-size: 14px; padding: 8px;")
-            view2_textedit.setFixedHeight(60)
-            view2_textedit.setLineWrapMode(QTextEdit.WidgetWidth)
-
-            view3_textedit = QTextEdit()
-            view3_textedit.setText(sentence)
-            view3_textedit.setStyleSheet("background-color: #6272a4; color: white; border-radius: 5px; font-size: 14px; padding: 8px;")
-            view3_textedit.setFixedHeight(60)
-            view3_textedit.setLineWrapMode(QTextEdit.WidgetWidth)
-
-            self.dosyaici_pencere.gridLayout.addWidget(view1_textedit, row, col1)
-            self.dosyaici_pencere.gridLayout.addWidget(view2_textedit, row, col2)
-            self.dosyaici_pencere.gridLayout.addWidget(view3_textedit, row, col3)
+        self.setUpdatesEnabled(True)  # Arayüz güncellemelerini tekrar aç
 
     def geri(self):
-        from dosya import dosyapencere
         self.close()
         self.giris = dosyapencere()
-        apply_theme(self.giris)  # Yeni pencereye temayı uygula
+        apply_theme(self.giris)
         self.giris.show()
 
     def anasayfa(self):
-        from anasayfa import anapencere
         self.close()
         self.giris = anapencere()
-        apply_theme(self.giris)  # Yeni pencereye temayı uygula
+        apply_theme(self.giris)
         self.giris.show()
+
     def kaydet(self):
+        yeni_dosya_adi = self.dosyaici_pencere.lineEdit_dosya.text().strip()
+
+        if not yeni_dosya_adi:
+            QMessageBox.warning(self, "Uyarı", "Dosya adı boş olamaz!")
+            return
+
+        # Dosya adı değişmişse, veritabanında güncelle
+        if yeni_dosya_adi != self.filename:
+            self.db.dosyaadiguncelle(self.filename, yeni_dosya_adi)
+            self.filename = yeni_dosya_adi
+
         id = self.db.dosyaidgetir(self.filename)
-        self.db.kelimesil(id)
+        
+        # Mevcut kelimeleri veritabanından al
+        mevcut_kelimeler = {kelime[0]: kelime for kelime in self.db.kelimelerigetir(id)}
+        
         layout = self.dosyaici_pencere.gridLayout
         row_count = layout.rowCount()
 
@@ -110,31 +97,42 @@ class dosyaicipencere(QMainWindow):
             ornek_widget = layout.itemAtPosition(row, 2)
 
             if kelime_widget and anlami_widget:
-               kelime = kelime_widget.widget().toPlainText().strip()
-               anlami = anlami_widget.widget().toPlainText().strip()
-               ornek = ornek_widget.widget().toPlainText().strip() if ornek_widget else ""
+                kelime = kelime_widget.widget().text().strip()
+                anlami = anlami_widget.widget().text().strip()
+                ornek = ornek_widget.widget().text().strip() if ornek_widget else ""
 
-               if kelime and anlami:
-                   self.db.kelimeekle(kelime, anlami, id, ornek)
-        QMessageBox.information(self, "Başarılı","Dosya Kaydedildi")
+                if kelime and anlami:
+                    if kelime in mevcut_kelimeler:
+                        # Mevcut kelimeyi güncelle (tekrar sayısı ve zorluk korunur)
+                        self.db.kelimeguncelle(kelime, anlami, id, ornek)
+                    else:
+                        # Yeni kelimeyi ekle
+                        self.db.kelimeekle(kelime, anlami, id, ornek)
+
+        QMessageBox.information(self, "Başarılı", "Dosya Kaydedildi")
         self.geri()
+
     def yeni(self):
-        self.dosyaici_pencere.yenikelime()
+        layout = self.dosyaici_pencere.gridLayout
+        row_count = layout.rowCount()
+
+        font = QFont("Arial", 14)
+        for col in range(3):
+            edit = QLineEdit()
+            edit.setStyleSheet("background-color: #6272a4; color: white; border-radius: 5px; font-size: 14px; padding: 8px;")
+            edit.setFixedHeight(40)
+            edit.setFont(font)
+            layout.addWidget(edit, row_count, col)
+
     def goruntule(self):
         self.zorluk = []
         if self.dosyaici_pencere.checkBox_hepsi.isChecked():
             self.kelimeleriyukle()
         else:
-            if self.dosyaici_pencere.checkBox_biliyom.isChecked():
-                self.zorluk.append(1)
-            else:
-                self.zorluk.append(999)
-            if self.dosyaici_pencere.checkBox_orta.isChecked():
-                self.zorluk.append(2)
-            else:
-                self.zorluk.append(999)
-            if self.dosyaici_pencere.checkBox_bilmiyom.isChecked():
-                self.zorluk.append(3)
-            else:
-                self.zorluk.append(999)
+            # Zorluk seviyelerini 3 elemanlı bir liste olarak ayarla
+            self.zorluk = [
+                1 if self.dosyaici_pencere.checkBox_biliyom.isChecked() else 0,
+                2 if self.dosyaici_pencere.checkBox_orta.isChecked() else 0,
+                3 if self.dosyaici_pencere.checkBox_bilmiyom.isChecked() else 0
+            ]
             self.kelimeleriyukle(self.zorluk)

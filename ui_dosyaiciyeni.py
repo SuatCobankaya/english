@@ -35,9 +35,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.lineEdit_dosya)
 
         self.checkBox_hepsi = QtWidgets.QCheckBox("Hepsi", self.centralwidget)
-        self.checkBox_biliyom = QtWidgets.QCheckBox("Biliyom", self.centralwidget)
+        self.checkBox_biliyom = QtWidgets.QCheckBox("Biliyorum", self.centralwidget)
         self.checkBox_orta = QtWidgets.QCheckBox("Orta", self.centralwidget)
-        self.checkBox_bilmiyom = QtWidgets.QCheckBox("Bilmiyom", self.centralwidget)
+        self.checkBox_bilmiyom = QtWidgets.QCheckBox("Bilmiyorum", self.centralwidget)
 
         self.horizontalLayout_2.addWidget(self.checkBox_hepsi)
         self.horizontalLayout_2.addWidget(self.checkBox_biliyom)

@@ -155,12 +155,26 @@ class database():
          self.cursor.execute("""DELETE FROM WORDS WHERE FileId = ?;""", (id,))
          self.con.commit()
          self.baglantikapat()
+    def dosyaadiguncelle(self, eski_ad, yeni_ad):
+         self.baglantiac()
+         self.cursor.execute("UPDATE Files SET FileName = ? WHERE FileName = ?", (yeni_ad, eski_ad))
+         self.con.commit()
+         self.baglantikapat()
     def dosyaidgetir(self,a):
          self.baglantiac()
          self.cursor.execute("SELECT FileId FROM Files WHERE FileName = ?", (a,))
          id = self.cursor.fetchall()
          self.baglantikapat()
          return id[0][0]
+    def kelimeguncelle(self, kelime, anlami, dosya_id, ornek):
+     self.baglantiac()
+     self.cursor.execute("""
+        UPDATE WORDS 
+        SET Meaning = ?, ExampleSentences = ? 
+        WHERE EnglishWord = ? AND FileId = ?
+     """, (anlami, ornek, kelime, dosya_id))
+     self.con.commit()
+     self.baglantikapat()
     def kelimeekle(self,kelime,anlam,dosyaid,cumle=None):
          self.baglantiac()
          self.cursor.execute("""INSERT INTO WORDS (EnglishWord, Meaning, FileId, ExampleSentences) VALUES (?, ?, ?, ?);""", (kelime,anlam,dosyaid,cumle))
@@ -173,5 +187,7 @@ class database():
         self.cursor.execute("""DELETE FROM WORDS WHERE FileId = ?;""", (id,))
         self.con.commit()
         self.baglantikapat()
+
+
 
 
