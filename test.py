@@ -100,19 +100,20 @@ class testpencere(QMainWindow):
 
     def kontrolet(self, buton):
         secilen = buton.text()
-
+        secilen = secilen.replace('\n', ' ')
+        dogru_cevap_duz = self.dogru_cevap.replace('\n', ' ')
         butonlar = [self.test_pencere.pushButton_a, self.test_pencere.pushButton_b,
                 self.test_pencere.pushButton_c, self.test_pencere.pushButton_d]
         
         for dogru in butonlar:
-            if dogru.text() == self.dogru_cevap:
+            if dogru.text().replace('\n', ' ') == dogru_cevap_duz:
                 dogru.setStyleSheet("background-color: green; color: white;")
-                self.dogru.append(self.soru_ingilizce)
+                self.dogru.append(self.soru_ingilizce.replace('\n', ' '))
                 self.dogrusayisi += 1
         
-        if secilen != self.dogru_cevap:
+        if secilen != dogru_cevap_duz:
             buton.setStyleSheet("background-color: red; color: white;")
-            self.yanlis.append(self.soru_ingilizce)
+            self.yanlis.append(self.soru_ingilizce.replace('\n', ' '))
             self.yanlissayisi += 1
         
         self.asildogru = self.dogrusayisi - self.yanlissayisi
