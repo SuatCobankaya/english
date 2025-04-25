@@ -68,6 +68,7 @@ class eslestirpencere(QMainWindow):
                    QtCore.QTimer.singleShot(1001, lambda: self.sonraki())
                if self.sayac==16:
                    QMessageBox.information(self, "Başarılı", "Eşleştirmeleri tamamladınız.")
+                   self.istatistik_kaydet("eslestirme", self.dogru, self.yanlis)
                    QtCore.QTimer.singleShot(200, lambda: self.anasayfa())
                
             else:
@@ -144,6 +145,8 @@ class eslestirpencere(QMainWindow):
             button.clicked.connect(self.eslestir)
 
     def dogru_eslesme(self, metin1, metin2):
+       metin1 = metin1.replace('\n', ' ')
+       metin2 = metin2.replace('\n', ' ')
        for ing, tr in self.kelimeler:
            if (metin1 == ing and metin2 == tr) or (metin1 == tr and metin2 == ing):
                if ing not in self.dogru:
