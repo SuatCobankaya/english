@@ -69,8 +69,9 @@ class istatislikpencere(QMainWindow):
             yanlislar = veri[2].split(",") if veri[2] else []
             toplam_dogru += len(dogrular)
             toplam_yanlis += len(yanlislar)
+            toplam_sayi = toplam_dogru+toplam_yanlis
 
-        oran = round((toplam_dogru / toplam_deneme) * 100, 2) if toplam_deneme > 0 else 0
+        oran = round((toplam_dogru / toplam_sayi) * 100, 2) if toplam_deneme > 0 else 0
         self.istatislik_pencere.label_deneme.setText(f"Toplam Deneme: {toplam_deneme}")
         self.istatislik_pencere.label_dogruluk.setText(f"Genel Doğruluk: {oran} %")
 
