@@ -87,7 +87,8 @@ class eslestirpencere(QMainWindow):
         a = 0
         b = 0
         while i < 16 :
-           self.buttons[numbers[i]-1].setText(self.kelimeler[a][b])
+           kelime = self.kelimeler[a][b]
+           self.buttons[numbers[i]-1].setText(self.kelimeyi_sigdir(kelime))
            if b == 0:
                b=1
                i = i+1

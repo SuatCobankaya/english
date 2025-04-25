@@ -85,11 +85,10 @@ class dosyaicipencere(QMainWindow):
 
         id = self.db.dosyaidgetir(self.filename)
         
-        # Mevcut kelimeleri veritabanından al
-        mevcut_kelimeler = {kelime[0]: kelime for kelime in self.db.kelimelerigetir(id)}
-        
+        # Arayüzdeki tüm kelimeleri topla
         layout = self.dosyaici_pencere.gridLayout
         row_count = layout.rowCount()
+        yeni_kelimeler = []
 
         for row in range(1, row_count):
             kelime_widget = layout.itemAtPosition(row, 0)
@@ -102,12 +101,14 @@ class dosyaicipencere(QMainWindow):
                 ornek = ornek_widget.widget().text().strip() if ornek_widget else ""
 
                 if kelime and anlami:
-                    if kelime in mevcut_kelimeler:
-                        # Mevcut kelimeyi güncelle (tekrar sayısı ve zorluk korunur)
-                        self.db.kelimeguncelle(kelime, anlami, id, ornek)
-                    else:
-                        # Yeni kelimeyi ekle
-                        self.db.kelimeekle(kelime, anlami, id, ornek)
+                    yeni_kelimeler.append((kelime, anlami, ornek))
+
+        # Veritabanındaki tüm kelimeleri sil
+        self.db.tumkelimelerisil(id)
+
+        # Yeni kelimeleri ekle
+        for kelime, anlami, ornek in yeni_kelimeler:
+            self.db.kelimeekle(kelime, anlami, id, ornek)
 
         QMessageBox.information(self, "Başarılı", "Dosya Kaydedildi")
         self.geri()
