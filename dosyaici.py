@@ -29,6 +29,7 @@ class dosyaicipencere(QMainWindow):
         self.setUpdatesEnabled(False) 
         id = self.db.dosyaidgetir(self.filename)
         kelimeler = self.db.kelimelerigetir(id, zorluk)
+        self.eski_kelimeler = kelimeler.copy()  
         self.dosyaici_pencere.lineEdit_dosya.setText(self.filename)
 
         layout = self.dosyaici_pencere.gridLayout
@@ -97,11 +98,20 @@ class dosyaicipencere(QMainWindow):
 
                 if kelime and anlami:
                     yeni_kelimeler.append((kelime, anlami, ornek))
-
-        self.db.tumkelimelerisil(id)
-
-        for kelime, anlami, ornek in yeni_kelimeler:
+        eski_set = set((k[0], k[1], k[2]) for k in self.eski_kelimeler)
+        yeni_set = set(yeni_kelimeler)
+        silinenler = eski_set - yeni_set
+        for kelime, anlami, ornek in silinenler:
+            self.db.kelimesil(kelime, id)
+        eklenenler = yeni_set - eski_set
+        for kelime, anlami, ornek in eklenenler:
             self.db.kelimeekle(kelime, anlami, id, ornek)
+        ortaklar = set(k[0] for k in eski_set & yeni_set)
+        for kelime in ortaklar:
+            eski = next(k for k in self.eski_kelimeler if k[0] == kelime)
+            yeni = next(k for k in yeni_kelimeler if k[0] == kelime)
+            if eski[1] != yeni[1] or eski[2] != yeni[2]:
+                self.db.kelimeguncelle(kelime, yeni[1], id, yeni[2])
 
         QMessageBox.information(self, "Başarılı", "Dosya Kaydedildi")
         self.geri()
