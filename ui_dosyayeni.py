@@ -9,13 +9,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
 
-        # Üstteki butonlar için horizontal layout
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.horizontalLayout.setContentsMargins(-1, 0, -1, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
 
-        # Geri butonu
         self.pushButton_geri = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_geri.setText("")
         icon = QtGui.QIcon()
@@ -25,7 +23,6 @@ class Ui_MainWindow(object):
         self.pushButton_geri.setObjectName("pushButton_geri")
         self.horizontalLayout.addWidget(self.pushButton_geri)
 
-        # Anasayfa butonu
         self.pushButton_anasayfa = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_anasayfa.setText("")
         icon1 = QtGui.QIcon()
@@ -35,41 +32,33 @@ class Ui_MainWindow(object):
         self.pushButton_anasayfa.setObjectName("pushButton_anasayfa")
         self.horizontalLayout.addWidget(self.pushButton_anasayfa)
 
-        # Boşluk ekle
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
 
         self.verticalLayout_2.addLayout(self.horizontalLayout)
 
-        # Scroll Area oluştur
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
 
-        # GroupBox oluştur
         self.groupBox = QtWidgets.QGroupBox()
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
 
-        # GroupBox için grid layout
         self.gridLayout = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout.setContentsMargins(10, 10, 10, 10)
         self.gridLayout.setSpacing(10)
         self.gridLayout.setObjectName("gridLayout")
 
-        # GroupBox'ı scroll area'ya ekle
         self.scrollArea.setWidget(self.groupBox)
         self.verticalLayout_2.addWidget(self.scrollArea)
 
-        # Alt butonlar için horizontal layout
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
-        # Boşluk ekle
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
 
-        # Sil butonu
         self.pushButton_sil = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -81,7 +70,6 @@ class Ui_MainWindow(object):
         self.pushButton_sil.setObjectName("pushButton_sil")
         self.horizontalLayout_2.addWidget(self.pushButton_sil)
 
-        # Yeni butonu
         self.pushButton_yeni = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -93,7 +81,6 @@ class Ui_MainWindow(object):
         self.pushButton_yeni.setObjectName("pushButton_yeni")
         self.horizontalLayout_2.addWidget(self.pushButton_yeni)
 
-        # Boşluk ekle
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
 

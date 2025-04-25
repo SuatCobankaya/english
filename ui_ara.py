@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QStyledItemDelegate
 
 class AlignDelegate(QStyledItemDelegate):
     def paint(self, painter, option, index):
-        option.displayAlignment = QtCore.Qt.AlignCenter  # Metni ortala
+        option.displayAlignment = QtCore.Qt.AlignCenter 
         super().paint(painter, option, index)
 
 class Ui_MainWindow(object):
@@ -15,10 +15,9 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
 
-        # Geri ve Anasayfa butonlarını sola yasla
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.horizontalLayout_2.setAlignment(QtCore.Qt.AlignLeft)  # Sola yasla
+        self.horizontalLayout_2.setAlignment(QtCore.Qt.AlignLeft)  
 
         self.pushButton_geri = QtWidgets.QPushButton(self.centralwidget)
         font = QtGui.QFont()
@@ -42,7 +41,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
-        # Ara butonu ve LineEdit'i yukarı al
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
 
@@ -60,16 +58,13 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        # ListView'i büyüt
         self.listView = QtWidgets.QListView(self.centralwidget)
         self.listView.setObjectName("listView_anlam")
 
-        # Yazı tipini ve satır boyutunu büyüt
         font = QtGui.QFont()
-        font.setPointSize(45)  # Yazı boyutunu büyüt
+        font.setPointSize(45)  
         self.listView.setFont(font)
 
-        # Stil ile satır yüksekliğini ve görünümü ayarla
         self.listView.setStyleSheet("""
             QListView {
                 font-size: 45pt;  /* Yazı boyutunu büyüt */
@@ -106,7 +101,6 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        # ListView için metin hizalamasını sağlayan delegate ekle
         self.listView.setItemDelegate(AlignDelegate())
 
     def retranslateUi(self, MainWindow):

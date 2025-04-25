@@ -9,24 +9,14 @@ class istatislikpencere(QMainWindow):
         self.istatislik_pencere = Ui_MainWindow()
         self.istatislik_pencere.setupUi(self)
         self.setCentralWidget(self.istatislik_pencere.centralwidget)
-
-        # Veritabanı bağlantısı
         self.db = database()
-
-        # Butonlar
         self.istatislik_pencere.pushButton_geri.clicked.connect(self.geri)
         self.istatislik_pencere.pushButton_anasayfa.clicked.connect(self.anasayfa)
-
-        # Tablolar
         self.tablo_test = self.istatislik_pencere.tableWidget_test
         self.tablo_eslestirme = self.istatislik_pencere.tableWidget_eslestirme
         self._setup_table(self.tablo_test)
         self._setup_table(self.tablo_eslestirme)
-
-        # Verileri yükle
         self.verileri_doldur()
-
-        # Çift tıklama ile detay göster
         self.tablo_test.cellDoubleClicked.connect(self.ayrinti_goster)
         self.tablo_eslestirme.cellDoubleClicked.connect(self.ayrinti_goster)
 

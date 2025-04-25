@@ -10,13 +10,12 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
 
-        # Üst butonlar (sol üst hizalı)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.pushButton_geri = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_geri.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../ingilizce-main-guncel/geri.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("geri.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_geri.setIcon(icon)
         self.pushButton_geri.setObjectName("pushButton_geri")
         self.horizontalLayout_2.addWidget(self.pushButton_geri)
@@ -24,16 +23,14 @@ class Ui_MainWindow(object):
         self.pushButton_anasayfa = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_anasayfa.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../ingilizce-main-guncel/main.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("main.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_anasayfa.setIcon(icon1)
         self.pushButton_anasayfa.setObjectName("pushButton_anasayfa")
         self.horizontalLayout_2.addWidget(self.pushButton_anasayfa)
 
-        # Butonları sol üstte tutmak için hizalamayı sola sabitle
         self.horizontalLayout_2.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
-        # Grup kutusu (Genel Özet)
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setObjectName("groupBox")
         self.groupBox.setTitle("Genel Özet")
@@ -42,17 +39,15 @@ class Ui_MainWindow(object):
         self.label_deneme = QtWidgets.QLabel(self.groupBox)
         self.label_deneme.setObjectName("label_deneme")
         self.horizontalLayout.addWidget(self.label_deneme)
-        self.horizontalLayout.addStretch(1)  # İkinci dosyadaki gibi etiketler arasında boşluk
+        self.horizontalLayout.addStretch(1)  
         self.label_dogruluk = QtWidgets.QLabel(self.groupBox)
         self.label_dogruluk.setObjectName("label_dogruluk")
         self.horizontalLayout.addWidget(self.label_dogruluk)
         self.verticalLayout.addWidget(self.groupBox)
 
-        # Sekmeler
         self.tablo = QtWidgets.QTabWidget(self.centralwidget)
         self.tablo.setObjectName("tablo")
 
-        # Test sekmesi
         self.test = QtWidgets.QWidget()
         self.test.setObjectName("test")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.test)
@@ -72,7 +67,6 @@ class Ui_MainWindow(object):
         self.gridLayout_3.addWidget(self.tableWidget_test, 0, 0, 1, 1)
         self.tablo.addTab(self.test, "")
 
-        # Eşleştirme sekmesi
         self.eslestirme = QtWidgets.QWidget()
         self.eslestirme.setObjectName("eslestirme")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.eslestirme)
@@ -95,7 +89,6 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.tablo)
         MainWindow.setCentralWidget(self.centralwidget)
 
-        # Menü ve durum çubuğu
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 37))
         self.menubar.setObjectName("menubar")

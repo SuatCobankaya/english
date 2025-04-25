@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
@@ -11,10 +9,9 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         
-        # Geri ve Anasayfa butonlarını sola yasla
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.horizontalLayout_2.setAlignment(QtCore.Qt.AlignLeft)  # Sola yasla
+        self.horizontalLayout_2.setAlignment(QtCore.Qt.AlignLeft)  
 
         self.pushButton_geri = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_geri.setText("")
@@ -34,7 +31,6 @@ class Ui_MainWindow(object):
         self.pushButton_anasayfa.setObjectName("pushButton_anasayfa")
         self.horizontalLayout_2.addWidget(self.pushButton_anasayfa)
 
-        # Sola yaslamak için esnek boşluk ekle
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
 

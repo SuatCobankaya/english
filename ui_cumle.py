@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
@@ -11,10 +9,9 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         
-        # Modified horizontal layout for top buttons
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.horizontalLayout_2.setAlignment(QtCore.Qt.AlignLeft)  # Align left
+        self.horizontalLayout_2.setAlignment(QtCore.Qt.AlignLeft)  
         
         self.pushButton_geri = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_geri.setText("")
@@ -34,7 +31,6 @@ class Ui_MainWindow(object):
         self.pushButton_anasayfa.setObjectName("pushButton_anasayfa")
         self.horizontalLayout_2.addWidget(self.pushButton_anasayfa)
         
-        # Removed the spacerItem to keep buttons left-aligned
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -58,15 +54,14 @@ class Ui_MainWindow(object):
         self.lineEdit.setObjectName("lineEdit")
         self.verticalLayout.addWidget(self.lineEdit)
         
-        # Modified layout for save button
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.horizontalLayout.setAlignment(QtCore.Qt.AlignCenter)  # Center alignment
+        self.horizontalLayout.setAlignment(QtCore.Qt.AlignCenter) 
         
         self.pushButton_kaydet = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_kaydet.setDefault(True)
         self.pushButton_kaydet.setObjectName("pushButton_kaydet")
-        self.pushButton_kaydet.setMaximumWidth(100)  # Set maximum width to make it smaller
+        self.pushButton_kaydet.setMaximumWidth(100)  
         self.horizontalLayout.addWidget(self.pushButton_kaydet)
         
         self.verticalLayout.addLayout(self.horizontalLayout)

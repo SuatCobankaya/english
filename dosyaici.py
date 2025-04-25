@@ -13,7 +13,6 @@ class dosyaicipencere(QMainWindow):
         self.dosyaici_pencere = Ui_MainWindow()
         self.dosyaici_pencere.setupUi(self)
         self.db = database()
-
         self.dosyaici_pencere.pushButton_geri.clicked.connect(self.geri)
         self.dosyaici_pencere.pushButton_anasayfa.clicked.connect(self.anasayfa)
         self.dosyaici_pencere.pushButton_kaydet.clicked.connect(self.kaydet)
@@ -27,7 +26,7 @@ class dosyaicipencere(QMainWindow):
         self.kelimeleriyukle()
 
     def kelimeleriyukle(self, zorluk=None):
-        self.setUpdatesEnabled(False)  # Arayüz güncellemelerini geçici olarak durdur
+        self.setUpdatesEnabled(False) 
         id = self.db.dosyaidgetir(self.filename)
         kelimeler = self.db.kelimelerigetir(id, zorluk)
         self.dosyaici_pencere.lineEdit_dosya.setText(self.filename)
@@ -39,7 +38,6 @@ class dosyaicipencere(QMainWindow):
                 item.widget().deleteLater()
 
         font = QFont("Arial", 14)
-
         headers = ["kelime", "anlami", "ornek cumle"]
         for idx, text in enumerate(headers):
             label = QLabel(text)
@@ -57,7 +55,7 @@ class dosyaicipencere(QMainWindow):
                 edit.setFixedHeight(40)
                 layout.addWidget(edit, row, col)
 
-        self.setUpdatesEnabled(True)  # Arayüz güncellemelerini tekrar aç
+        self.setUpdatesEnabled(True) 
 
     def geri(self):
         self.close()
@@ -78,14 +76,11 @@ class dosyaicipencere(QMainWindow):
             QMessageBox.warning(self, "Uyarı", "Dosya adı boş olamaz!")
             return
 
-        # Dosya adı değişmişse, veritabanında güncelle
         if yeni_dosya_adi != self.filename:
             self.db.dosyaadiguncelle(self.filename, yeni_dosya_adi)
             self.filename = yeni_dosya_adi
 
         id = self.db.dosyaidgetir(self.filename)
-        
-        # Arayüzdeki tüm kelimeleri topla
         layout = self.dosyaici_pencere.gridLayout
         row_count = layout.rowCount()
         yeni_kelimeler = []
@@ -103,10 +98,8 @@ class dosyaicipencere(QMainWindow):
                 if kelime and anlami:
                     yeni_kelimeler.append((kelime, anlami, ornek))
 
-        # Veritabanındaki tüm kelimeleri sil
         self.db.tumkelimelerisil(id)
 
-        # Yeni kelimeleri ekle
         for kelime, anlami, ornek in yeni_kelimeler:
             self.db.kelimeekle(kelime, anlami, id, ornek)
 
@@ -130,7 +123,6 @@ class dosyaicipencere(QMainWindow):
         if self.dosyaici_pencere.checkBox_hepsi.isChecked():
             self.kelimeleriyukle()
         else:
-            # Zorluk seviyelerini 3 elemanlı bir liste olarak ayarla
             self.zorluk = [
                 1 if self.dosyaici_pencere.checkBox_biliyom.isChecked() else 0,
                 2 if self.dosyaici_pencere.checkBox_orta.isChecked() else 0,

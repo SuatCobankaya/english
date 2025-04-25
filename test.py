@@ -108,12 +108,14 @@ class testpencere(QMainWindow):
         for dogru in butonlar:
             if dogru.text().replace('\n', ' ') == dogru_cevap_duz:
                 dogru.setStyleSheet("background-color: green; color: white;")
-                self.dogru.append(self.soru_ingilizce.replace('\n', ' '))
+                if self.soru_ingilizce.replace('\n', ' ') not in self.dogru:
+                    self.dogru.append(self.soru_ingilizce.replace('\n', ' '))
                 self.dogrusayisi += 1
         
         if secilen != dogru_cevap_duz:
             buton.setStyleSheet("background-color: red; color: white;")
-            self.yanlis.append(self.soru_ingilizce.replace('\n', ' '))
+            if self.soru_ingilizce.replace('\n', ' ') not in self.yanlis:
+                self.yanlis.append(self.soru_ingilizce.replace('\n', ' '))
             self.yanlissayisi += 1
         
         self.asildogru = self.dogrusayisi - self.yanlissayisi
@@ -131,6 +133,7 @@ class testpencere(QMainWindow):
             pass
         else:
             self.soru_index -= 1
+            self.test_pencere.progressBar.setValue(self.soru_index)
             self.soruolustur()
 
     def anasayfa(self):

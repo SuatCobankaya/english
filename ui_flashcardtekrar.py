@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
@@ -11,10 +9,9 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         
-        # Geri ve Anasayfa butonlarını sola yasla
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.horizontalLayout_3.setAlignment(QtCore.Qt.AlignLeft)  # Sola yasla
+        self.horizontalLayout_3.setAlignment(QtCore.Qt.AlignLeft)  
 
         self.pushButton_geri = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_geri.setText("")
@@ -34,13 +31,11 @@ class Ui_MainWindow(object):
         self.pushButton_anasayfa.setObjectName("pushButton_anasayfa")
         self.horizontalLayout_3.addWidget(self.pushButton_anasayfa)
 
-        # Sola yaslamak için esnek boşluk ekle
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
 
         self.verticalLayout.addLayout(self.horizontalLayout_3)
 
-        # Kelime butonu
         self.pushButton_kelime = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
@@ -54,10 +49,9 @@ class Ui_MainWindow(object):
         self.pushButton_kelime.setObjectName("pushButton_kelime")
         self.verticalLayout.addWidget(self.pushButton_kelime)
 
-        # Biliyom, Orta, Bilmiyom butonlarını ortala
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.horizontalLayout.setAlignment(QtCore.Qt.AlignCenter)  # Ortala
+        self.horizontalLayout.setAlignment(QtCore.Qt.AlignCenter)  
 
         self.pushButton_bilmiyom = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_bilmiyom.setDefault(True)
@@ -76,7 +70,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        # Önceki ve Sonraki butonları ile ProgressBar
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
@@ -125,9 +118,9 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_kelime.setText(_translate("MainWindow", "kelime"))
-        self.pushButton_bilmiyom.setText(_translate("MainWindow", "bilmiyom"))
-        self.pushButton_orta.setText(_translate("MainWindow", "orta"))
-        self.pushButton_biliyom.setText(_translate("MainWindow", "biliyom"))
+        self.pushButton_bilmiyom.setText(_translate("MainWindow", "Bilmiyorum"))
+        self.pushButton_orta.setText(_translate("MainWindow", "Orta"))
+        self.pushButton_biliyom.setText(_translate("MainWindow", "Biliyorum"))
         self.pushButton_onceki.setText(_translate("MainWindow", "Önceki"))
         self.pushButton_sonraki.setText(_translate("MainWindow", "Sonraki"))
         self.menuAyarlar.setTitle(_translate("MainWindow", "Ayarlar"))

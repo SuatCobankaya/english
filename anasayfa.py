@@ -9,9 +9,8 @@ from flashcard import flashcardpencere
 from test import testpencere
 from veritabani import database
 
-# Global tema değişkeni
 global current_theme
-current_theme = "dark"  # Varsayılan tema
+current_theme = "dark"
 
 def apply_theme(window):
     """Global temayı belirtilen pencereye uygular."""
@@ -88,8 +87,6 @@ class anapencere(QMainWindow):
         self.ana_pencere.actionWhite.triggered.connect(self.whitemode)
         self.setCentralWidget(self.ana_pencere.centralwidget)
         self.showMaximized()
-        
-        # Başlangıçta global temayı uygula
         apply_theme(self)
 
     def ara(self):
@@ -160,9 +157,3 @@ class anapencere(QMainWindow):
         self.db.con.commit()
         self.db.baglantikapat()
         event.accept()
-
-if __name__ == "__main__":
-    app = QApplication([])
-    window = anapencere()
-    window.show()
-    app.exec_()

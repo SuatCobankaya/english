@@ -10,9 +10,8 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
 
-        # **Üst Butonları Sola Yasla**
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_4.setAlignment(QtCore.Qt.AlignLeft)  # Butonları sola yasla
+        self.horizontalLayout_4.setAlignment(QtCore.Qt.AlignLeft)  
 
         self.pushButton_geri = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_geri.setIcon(QtGui.QIcon("geri.png"))
@@ -26,7 +25,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_4)
 
-        # Dosya Adı ve Filtreleme
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.label = QtWidgets.QLabel("Dosya Adı", self.centralwidget)
         self.horizontalLayout_2.addWidget(self.label)
@@ -49,7 +47,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
-        # **Scroll Alanı Eklenmiş GroupBox**
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
@@ -60,34 +57,32 @@ class Ui_MainWindow(object):
 
         self.gridLayout = QtWidgets.QGridLayout(self.groupBox)
 
-        # **Label ve LineEdit'leri Küçültülmüş Şekilde Ayarla**
         labels = ["Kelime", "Anlamı", "Örnek Cümle"]
         for col, text in enumerate(labels):
             label = QtWidgets.QLabel(text, self.groupBox)
-            label.setFixedHeight(20)  # Sabit yükseklik ver
+            label.setFixedHeight(20)  
             label.setAlignment(QtCore.Qt.AlignCenter)
-            label.setStyleSheet("border: 1px solid gray; padding: 2px;")  # Daha düzenli görünüm
+            label.setStyleSheet("border: 1px solid gray; padding: 2px;")  
             self.gridLayout.addWidget(label, 0, col)
 
-        for row in range(1, 6):  # 5 satırlık örnek girdiler
+        for row in range(1, 6):  
             for col in range(3):
                 lineEdit = QtWidgets.QLineEdit(self.groupBox)
-                lineEdit.setFixedHeight(25)  # LineEdit'leri sabitle
+                lineEdit.setFixedHeight(25)  
                 self.gridLayout.addWidget(lineEdit, row, col)
 
         self.scrollLayout.addWidget(self.groupBox)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
 
-        # **Alt Butonları Küçült ve Ortala**
         self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setAlignment(QtCore.Qt.AlignCenter)  # Butonları ortala
+        self.horizontalLayout.setAlignment(QtCore.Qt.AlignCenter)  
 
         self.pushButton_yeni = QtWidgets.QPushButton("Yeni Kelime", self.centralwidget)
-        self.pushButton_yeni.setFixedSize(100, 30)  # Butonları küçült
+        self.pushButton_yeni.setFixedSize(100, 30)  
 
         self.pushButton_kaydet = QtWidgets.QPushButton("Kaydet", self.centralwidget)
-        self.pushButton_kaydet.setFixedSize(100, 30)  # Butonları küçült
+        self.pushButton_kaydet.setFixedSize(100, 30)  
 
         self.horizontalLayout.addWidget(self.pushButton_yeni)
         self.horizontalLayout.addWidget(self.pushButton_kaydet)

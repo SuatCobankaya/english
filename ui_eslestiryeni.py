@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
@@ -15,10 +13,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         
-        # Modified button size and alignment
         self.pushButton_geri = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_geri.setText("")
-        self.pushButton_geri.setMaximumSize(QtCore.QSize(40, 40))  # Smaller size
+        self.pushButton_geri.setMaximumSize(QtCore.QSize(40, 40))  
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("geri.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_geri.setIcon(icon)
@@ -28,7 +25,7 @@ class Ui_MainWindow(object):
         
         self.pushButton_anasayfa = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_anasayfa.setText("")
-        self.pushButton_anasayfa.setMaximumSize(QtCore.QSize(40, 40))  # Smaller size
+        self.pushButton_anasayfa.setMaximumSize(QtCore.QSize(40, 40))  
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("main.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_anasayfa.setIcon(icon1)
@@ -36,7 +33,6 @@ class Ui_MainWindow(object):
         self.pushButton_anasayfa.setObjectName("pushButton_anasayfa")
         self.horizontalLayout.addWidget(self.pushButton_anasayfa)
         
-        # Added stretch to push buttons to the left
         self.horizontalLayout.addStretch(1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         
@@ -48,13 +44,11 @@ class Ui_MainWindow(object):
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
         
-        # Modified button size policy for grid buttons
         button_size_policy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         
-        # Create buttons with larger size
         self.pushButton_1 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_1.setSizePolicy(button_size_policy)
-        self.pushButton_1.setMinimumSize(QtCore.QSize(100, 80))  # Increased minimum size
+        self.pushButton_1.setMinimumSize(QtCore.QSize(100, 80))  
         self.pushButton_1.setDefault(True)
         self.pushButton_1.setObjectName("pushButton_1")
         self.gridLayout.addWidget(self.pushButton_1, 0, 0, 1, 1)
@@ -168,18 +162,17 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         
-        # Modified progress bar layout
         self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
         self.progressBar.setProperty("value", 24)
-        self.progressBar.setMinimumSize(QtCore.QSize(0, 30))  # Increased height
+        self.progressBar.setMinimumSize(QtCore.QSize(0, 30))  
         self.progressBar.setObjectName("progressBar")
-        self.horizontalLayout_2.addWidget(self.progressBar, 3)  # Stretch factor of 3
+        self.horizontalLayout_2.addWidget(self.progressBar, 3)  
         
         self.pushButton_sonraki = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_sonraki.setMinimumSize(QtCore.QSize(100, 30))  # Fixed size for button
+        self.pushButton_sonraki.setMinimumSize(QtCore.QSize(100, 30))  
         self.pushButton_sonraki.setDefault(True)
         self.pushButton_sonraki.setObjectName("pushButton_sonraki")
-        self.horizontalLayout_2.addWidget(self.pushButton_sonraki, 1)  # Stretch factor of 1
+        self.horizontalLayout_2.addWidget(self.pushButton_sonraki, 1)  
         
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         MainWindow.setCentralWidget(self.centralwidget)

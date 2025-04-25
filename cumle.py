@@ -10,6 +10,7 @@ class cumlepencere(QMainWindow):
         self.cumle_pencere.setupUi(self)
         self.cumle_pencere.pushButton_geri.clicked.connect(self.geri)
         self.cumle_pencere.pushButton_anasayfa.clicked.connect(self.anasayfa)
+        self.cumle_pencere.pushButton_kaydet.clicked.connect(self.anasayfa)
         self.setCentralWidget(self.cumle_pencere.centralwidget) 
         kelime2dane = random.sample(self.kelimeler,2)
         self.cumle_pencere.label.setText(kelime2dane[0][0]+" ve "+ kelime2dane[1][0]+" kelimelerini kullanarak örnek cümle oluşturunuz")

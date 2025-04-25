@@ -10,9 +10,8 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
 
-        # **Üst Butonları Sola Yasla**
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_4.setAlignment(QtCore.Qt.AlignLeft)  # Butonları sola yasla
+        self.horizontalLayout_4.setAlignment(QtCore.Qt.AlignLeft)  
 
         self.pushButton_geri = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_geri.setIcon(QtGui.QIcon("geri.png"))
@@ -26,26 +25,24 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_4)
 
-        # Dosya Adı ve Filtreleme (Sadeleştirilmiş ve Boşluklar Kaldırılmış)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setAlignment(QtCore.Qt.AlignCenter)  # Ortala
-        self.horizontalLayout_2.setSpacing(0)  # Layout içindeki boşluğu sıfırla
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)  # Kenar boşluklarını sıfırla
+        self.horizontalLayout_2.setAlignment(QtCore.Qt.AlignCenter)  
+        self.horizontalLayout_2.setSpacing(0)  
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)  
 
         self.label = QtWidgets.QLabel("Dosya Adı", self.centralwidget)
         self.label.setStyleSheet("background-color: #44475a; color: white; border-radius: 5px;")
-        self.label.setContentsMargins(5, 5, 5, 5)  # Etiket kenar boşluklarını sıfırla
-        self.label.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)  # Sabit genişlik
+        self.label.setContentsMargins(5, 5, 5, 5)  
+        self.label.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)  
         self.horizontalLayout_2.addWidget(self.label)
 
         self.lineEdit_dosya = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_dosya.setFixedWidth(200)  # LineEdit'in genişliğini küçült
-        self.lineEdit_dosya.setContentsMargins(0, 0, 0, 0)  # LineEdit kenar boşluklarını sıfırla
+        self.lineEdit_dosya.setFixedWidth(200)  
+        self.lineEdit_dosya.setContentsMargins(0, 0, 0, 0)  
         self.horizontalLayout_2.addWidget(self.lineEdit_dosya)
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
-        # **Scroll Alanı Eklenmiş GroupBox**
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
@@ -56,35 +53,32 @@ class Ui_MainWindow(object):
 
         self.gridLayout = QtWidgets.QGridLayout(self.groupBox)
 
-        # **Label ve LineEdit'leri Küçültülmüş Şekilde Ayarla**
         labels = ["Kelime", "Anlamı", "Örnek Cümle"]
         for col, text in enumerate(labels):
             label = QtWidgets.QLabel(text, self.groupBox)
-            label.setFixedHeight(20)  # Sabit yükseklik ver
+            label.setFixedHeight(20) 
             label.setAlignment(QtCore.Qt.AlignCenter)
-            label.setStyleSheet("border: 1px solid gray; padding: 2px;")  # Daha düzenli görünüm
+            label.setStyleSheet("border: 1px solid gray; padding: 2px;")  
             self.gridLayout.addWidget(label, 0, col)
 
-        for row in range(1, 6):  # 5 satırlık örnek girdiler
+        for row in range(1, 6):  
             for col in range(3):
                 lineEdit = QtWidgets.QLineEdit(self.groupBox)
-                lineEdit.setFixedHeight(25)  # LineEdit'leri sabitle
+                lineEdit.setFixedHeight(25)  
                 self.gridLayout.addWidget(lineEdit, row, col)
 
         self.scrollLayout.addWidget(self.groupBox)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
 
-        # **Alt Butonları Küçült ve Ortala**
         self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setAlignment(QtCore.Qt.AlignCenter)  # Butonları ortala
+        self.horizontalLayout.setAlignment(QtCore.Qt.AlignCenter)  
 
         self.pushButton_yeni = QtWidgets.QPushButton("Yeni Kelime", self.centralwidget)
-        self.pushButton_yeni.setFixedSize(100, 30)  # Butonları küçült
+        self.pushButton_yeni.setFixedSize(100, 30)  
 
         self.pushButton_kaydet = QtWidgets.QPushButton("Kaydet", self.centralwidget)
-        self.pushButton_kaydet.setFixedSize(100, 30)  # Butonları küçült
-
+        self.pushButton_kaydet.setFixedSize(100, 30)  
         self.horizontalLayout.addWidget(self.pushButton_yeni)
         self.horizontalLayout.addWidget(self.pushButton_kaydet)
         self.verticalLayout.addLayout(self.horizontalLayout)

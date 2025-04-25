@@ -24,7 +24,6 @@ class flashcardpencere(QMainWindow):
         self.index = 0
         self.sayac = 0
         self.kelime = None
-        #proses bar
         self.flashcard_pencere.progressBar.setRange(0, len(self.kelimeler)-1)
         self.flashcard_pencere.progressBar.setValue(self.sayac)
         

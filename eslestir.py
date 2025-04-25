@@ -171,6 +171,7 @@ class eslestirpencere(QMainWindow):
        btn2.setEnabled(False)
 
     def istatistik_kaydet(self,tip, dogru_kelimeler, yanlis_kelimeler):
+        dogru_kelimeler = [k for k in self.dogru if k not in yanlis_kelimeler]
         db = database()
         db.baglantiac()
         db.cursor.execute("""
