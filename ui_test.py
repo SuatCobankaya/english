@@ -167,7 +167,6 @@ class Ui_MainWindow(object):
         self.pushButton_a.setText(_translate("MainWindow", "A.)"))
         self.pushButton_c.setText(_translate("MainWindow", "C.)"))
         self.pushButton_d.setText(_translate("MainWindow", "D.)"))
-        self.label_cevap.setText(_translate("MainWindow", "Cevap girin"))
         self.pushButton_onceki.setText(_translate("MainWindow", "Önceki"))
         self.pushButton_sonraki.setText(_translate("MainWindow", "Sonraki"))
         self.menuAyarlar.setTitle(_translate("MainWindow", "Ayarlar"))

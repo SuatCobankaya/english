@@ -53,13 +53,13 @@ class flashcardpencere(QMainWindow):
         if self.sayac == self.boyut-1:
             if self.kelime is not None:
                 self.db.algo(self.zorluk,self.kelime)
-                QMessageBox.information(self, "Başarılı", " kelimeler bitti. ")
+                QMessageBox.information(self, "Başarılı", " Kelimeleri Başarıyla Tamamladınız! ")
                 from anasayfa import anapencere
                 self.giris = anapencere()
                 self.giris.show()
                 self.close() 
             else:
-                QMessageBox.warning(self, "Hata", "bir zorluk degeri girin!")
+                QMessageBox.warning(self, "Hata", "Bir Zorluk Değeri Girin!")
         else:
             if self.kelime is not None:
                 self.db.algo(self.zorluk,self.kelime)
@@ -74,7 +74,7 @@ class flashcardpencere(QMainWindow):
                 self.flashcard_pencere.pushButton_kelime.setStyleSheet("background-color: lightblue; color: black;")
                 self.index = 0
             else:
-                QMessageBox.warning(self, "Hata", "bir zorluk degeri girin!")
+                QMessageBox.warning(self, "Hata", "Bir Zorluk Değeri Girin!")
 
     def kelime(self,):
         current_index = self.index

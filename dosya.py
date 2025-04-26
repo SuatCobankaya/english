@@ -104,7 +104,7 @@ class dosyapencere(QMainWindow):
         self.close()
 
     def learn_file(self,filename):
-        sayi, ok = QInputDialog.getText(self, "kalime sayisi", "kelime sayisi girin:")
+        sayi, ok = QInputDialog.getText(self, "Kelime Sayısı", "Kelime Sayısı Giriniz:")
         sinir = self.db.tekrarvarmi(filename)
         id = self.db.dosyaidgetir(filename)
         if ok:
@@ -119,13 +119,13 @@ class dosyapencere(QMainWindow):
                self.giris.show()
                self.close()
             else:
-               QMessageBox.warning(self, "Hata", "maksimum kelime sayisi " + str(sinir) + " dir") 
+              QMessageBox.warning(self, "Hata", "Öğrenebileceğiniz Maksimum Kelime Sayısı: " + str(sinir))  
          except ValueError:
-            QMessageBox.warning(self, "Hata", "Geçerli bir sayı giriniz.")
+            QMessageBox.warning(self, "Hata", "Geçerli Bir Sayı Giriniz.")
 
 
     def tekrar_file(self,filename):
-        sayi, ok = QInputDialog.getText(self, "kalime sayisi", "kelime sayisi girin:")
+        sayi, ok = QInputDialog.getText(self, "Kelime Sayısı ", "Kelime Sayısı Giriniz:")
         sinir = self.db.kelimevarmi(filename)
         id = self.db.dosyaidgetir(filename)
         if ok:
@@ -140,9 +140,10 @@ class dosyapencere(QMainWindow):
                self.giris.show()
                self.close()
             else:
-               QMessageBox.warning(self, "Hata", "maksimum kelime sayisi " + str(sinir) + " dir") 
+               QMessageBox.warning(self, "Hata", "Toplam Öğrendiğiniz Kelime Sayısı: " + str(sinir) )
+               
          except ValueError:
-            QMessageBox.warning(self, "Hata", "Geçerli bir sayı giriniz.")
+            QMessageBox.warning(self, "Hata", "Geçerli Bir Sayı Giriniz.")
 
             
         

@@ -123,7 +123,7 @@ class eslestirpencere(QMainWindow):
                   a = a+1
                   i = i+1
         else:
-            QMessageBox.information(self, "Başarılı", " eslestirmeler bitti. ")
+            QMessageBox.information(self, "Başarılı", " Eşleştirmeler Bitti. ")
             self.istatistik_kaydet("eslestirme", self.dogru, self.yanlis)
             self.anasayfa()
 

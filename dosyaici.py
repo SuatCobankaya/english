@@ -39,7 +39,7 @@ class dosyaicipencere(QMainWindow):
                 item.widget().deleteLater()
 
         font = QFont("Arial", 14)
-        headers = ["kelime", "anlami", "ornek cumle"]
+        headers = ["Kelime", "Anlamı", "Örnek Cümle"]
         for idx, text in enumerate(headers):
             label = QLabel(text)
             label.setStyleSheet("background-color: #44475a; color: white; border-radius: 5px;")

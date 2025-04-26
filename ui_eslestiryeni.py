@@ -38,6 +38,9 @@ class Ui_MainWindow(object):
         
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.label.setFont(font)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
         self.verticalLayout_2.addLayout(self.verticalLayout)
