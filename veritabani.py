@@ -62,7 +62,7 @@ class database:
 
     def randomtüm(self, sayi):
         self.baglantiac()
-        self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS")
+        self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS WHERE FileId = ?", (2,))
         rastgele = self.cursor.fetchall()
         self.baglantikapat()
         kelimeler = random.sample(rastgele, sayi)
