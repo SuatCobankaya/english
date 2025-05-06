@@ -30,8 +30,6 @@ class dosyapencere(QMainWindow):
     def yeni(self, ):
         from yenidosya import yenidosyapencere
         self.giris = yenidosyapencere()
-        from anasayfa import apply_theme
-        apply_theme(self.giris)
         self.giris.show()
         self.close() 
     def sil(self, ):
@@ -108,8 +106,6 @@ class dosyapencere(QMainWindow):
         from dosyaici import dosyaicipencere
         self.giris = dosyaicipencere()
         self.giris.dosyaismial(filename)
-        from anasayfa import apply_theme
-        apply_theme(self.giris)
         self.giris.show()
         self.close()
 
@@ -124,8 +120,6 @@ class dosyapencere(QMainWindow):
                kelimeler = self.db.randomyeni(id,kelime_sayisi)
                from flashcardtekrar import flashcardtekrarpencere
                self.giris = flashcardtekrarpencere(kelimeler)
-               from anasayfa import apply_theme
-               apply_theme(self.giris)
                self.giris.show()
                self.close()
             else:
@@ -145,8 +139,6 @@ class dosyapencere(QMainWindow):
                kelimeler = self.db.randomtekrar(id,kelime_sayisi)
                from flashcard import flashcardpencere
                self.giris = flashcardpencere(kelimeler)
-               from anasayfa import apply_theme
-               apply_theme(self.giris)
                self.giris.show()
                self.close()
             else:

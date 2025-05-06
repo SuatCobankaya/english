@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from ui_dosyaiciyeni import Ui_MainWindow
-from anasayfa import apply_theme
 from veritabani import database
 from dosya import dosyapencere
 from anasayfa import anapencere
@@ -19,7 +18,6 @@ class dosyaicipencere(QMainWindow):
         self.dosyaici_pencere.pushButton_yeni.clicked.connect(self.yeni)
         self.dosyaici_pencere.pushButton_goruntule.clicked.connect(self.goruntule)
         self.setCentralWidget(self.dosyaici_pencere.centralwidget) 
-        apply_theme(self)
 
     def dosyaismial(self, isim):
         self.filename = isim
@@ -61,13 +59,11 @@ class dosyaicipencere(QMainWindow):
     def geri(self):
         self.close()
         self.giris = dosyapencere()
-        apply_theme(self.giris)
         self.giris.show()
 
     def anasayfa(self):
         self.close()
         self.giris = anapencere()
-        apply_theme(self.giris)
         self.giris.show()
 
     def kaydet(self):
