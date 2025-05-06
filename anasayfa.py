@@ -41,7 +41,6 @@ class anapencere(QMainWindow):
         self.ana_pencere.pushButton_kart.clicked.connect(self.kart)
         self.ana_pencere.pushButton_kaydet.clicked.connect(self.yenile)
         self.ana_pencere.pushButton_test.clicked.connect(self.test)
-        self.ana_pencere.actionWhite.triggered.connect(self.whitemode)
         self.setCentralWidget(self.ana_pencere.centralwidget)
         self.showMaximized()
         
