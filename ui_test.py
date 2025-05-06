@@ -136,32 +136,30 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
 
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 37))
-        self.menubar.setObjectName("menubar")
-        self.menuAyarlar = QtWidgets.QMenu(self.menubar)
-        self.menuAyarlar.setObjectName("menuAyarlar")
-        self.menuDarkmode = QtWidgets.QMenu(self.menuAyarlar)
-        self.menuDarkmode.setObjectName("menuDarkmode")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-        self.actionWhite = QtWidgets.QAction(MainWindow)
-        self.actionWhite.setObjectName("actionWhite")
-        self.actionDark = QtWidgets.QAction(MainWindow)
-        self.actionDark.setObjectName("actionDark")
-        self.menuDarkmode.addAction(self.actionWhite)
-        self.menuDarkmode.addAction(self.actionDark)
-        self.menuAyarlar.addAction(self.menuDarkmode.menuAction())
-        self.menubar.addAction(self.menuAyarlar.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        dark_stylesheet = """
+        QWidget {
+            background-color: #2e2e2e;
+            color: white;
+        }
+        QPushButton {
+            background-color: #555555;
+            color: white;
+            border: 1px solid #777777;
+            padding: 5px;
+        }
+        QPushButton:hover {
+            background-color: #777777;
+        }
+        """
+        MainWindow.setStyleSheet(dark_stylesheet)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Kelime Uygulaması"))
         self.label_soru.setText(_translate("MainWindow", "Soru ?"))
         self.pushButton_b.setText(_translate("MainWindow", "B.)"))
         self.pushButton_a.setText(_translate("MainWindow", "A.)"))
@@ -169,10 +167,6 @@ class Ui_MainWindow(object):
         self.pushButton_d.setText(_translate("MainWindow", "D.)"))
         self.pushButton_onceki.setText(_translate("MainWindow", "Önceki"))
         self.pushButton_sonraki.setText(_translate("MainWindow", "Sonraki"))
-        self.menuAyarlar.setTitle(_translate("MainWindow", "Ayarlar"))
-        self.menuDarkmode.setTitle(_translate("MainWindow", "Tema"))
-        self.actionWhite.setText(_translate("MainWindow", "White"))
-        self.actionDark.setText(_translate("MainWindow", "Dark"))
 
 
 if __name__ == "__main__":

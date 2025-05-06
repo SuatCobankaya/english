@@ -92,6 +92,23 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        dark_stylesheet = """
+        QWidget {
+            background-color: #2e2e2e;
+            color: white;
+        }
+        QPushButton {
+            background-color: #555555;
+            color: white;
+            border: 1px solid #777777;
+            padding: 5px;
+        }
+        QPushButton:hover {
+            background-color: #777777;
+        }
+        """
+        MainWindow.setStyleSheet(dark_stylesheet)
+
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle("Kelime Uygulaması")
     def yenikelime(self):

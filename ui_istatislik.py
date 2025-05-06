@@ -101,9 +101,42 @@ class Ui_MainWindow(object):
         self.tablo.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        dark_stylesheet = """
+        QWidget {
+            background-color: #2e2e2e;
+            color: white;
+        }
+        QPushButton {
+            background-color: #555555;
+            color: white;
+            border: 1px solid #777777;
+            padding: 5px;
+        }
+        QPushButton:hover {
+            background-color: #777777;
+        }
+        QHeaderView::section {
+            background-color: #3c3c3c;
+            color: white;
+            padding: 5px;
+            border: 1px solid #555;
+            font-weight: bold;
+        }
+        QTableWidget {
+            gridline-color: #444444;
+            background-color: #2e2e2e;
+            alternate-background-color: #3a3a3a;
+        }
+        QTableWidget QTableCornerButton::section {
+            background-color: #3c3c3c;
+            border: 1px solid #555;
+        }
+        """
+        MainWindow.setStyleSheet(dark_stylesheet)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Kelime Uygulaması"))
         self.groupBox.setTitle(_translate("MainWindow", "Genel Özet"))
         self.label_deneme.setText(_translate("MainWindow", "TextLabel"))
         self.label_dogruluk.setText(_translate("MainWindow", "TextLabel"))
