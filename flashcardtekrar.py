@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from ui_flashcardtekrar import Ui_MainWindow
 from veritabani import database
+from PyQt5.QtCore import Qt,QEvent
 
 class flashcardtekrarpencere(QMainWindow):  
     def __init__(self,kelimeler):
@@ -12,7 +13,7 @@ class flashcardtekrarpencere(QMainWindow):
         self.db = database()
         self.flashcardtekrar_pencere.pushButton_geri.clicked.connect(self.geri)
         self.flashcardtekrar_pencere.pushButton_anasayfa.clicked.connect(self.anasayfa)
-        self.flashcardtekrar_pencere.pushButton_kelime.clicked.connect(self.kelime)
+        self.flashcardtekrar_pencere.pushButton_kelime.clicked.connect(self.cevir)
         self.flashcardtekrar_pencere.pushButton_sonraki.clicked.connect(self.sonraki)
         self.flashcardtekrar_pencere.pushButton_onceki.clicked.connect(self.onceki)
         self.flashcardtekrar_pencere.pushButton_biliyom.clicked.connect(self.kolay)
@@ -26,6 +27,36 @@ class flashcardtekrarpencere(QMainWindow):
         self.kelime = None
         self.flashcardtekrar_pencere.progressBar.setRange(0, len(self.kelimeler)-1)
         self.flashcardtekrar_pencere.progressBar.setValue(self.sayac)
+        cw = self.flashcardtekrar_pencere.centralwidget
+        cw.installEventFilter(self)
+        cw.setFocusPolicy(Qt.StrongFocus)
+        cw.setFocus()
+
+    def eventFilter(self, obj, event):
+        from PyQt5.QtCore import QEvent
+        if obj is self.flashcardtekrar_pencere.centralwidget and event.type() == QEvent.KeyPress:
+            key = event.key()
+            if key == Qt.Key_Right:
+                self.kolay()
+                return True
+            elif key == Qt.Key_Down:
+                self.orta()
+                return True
+            elif key == Qt.Key_Left:
+                self.zor()
+                return True
+            elif key == Qt.Key_Space:
+                self.cevir()
+                return True
+            elif key == Qt.Key_Escape:
+                self.geri()
+                return True
+            elif key == Qt.Key_A:
+                self.onceki()
+                return True
+        
+        
+        return super().eventFilter(obj, event)
         
     def geri(self, ):
         from dosya import dosyapencere
@@ -81,7 +112,7 @@ class flashcardtekrarpencere(QMainWindow):
             else:
                 QMessageBox.warning(self, "Hata", "bir zorluk degeri girin!")
 
-    def kelime(self,):
+    def cevir(self,):
         current_index = self.index
 
         if current_index == 0:
@@ -92,21 +123,27 @@ class flashcardtekrarpencere(QMainWindow):
             self.flashcardtekrar_pencere.pushButton_kelime.setText(self.kelimeler[self.sayac][0])  
             self.flashcardtekrar_pencere.pushButton_kelime.setStyleSheet("background-color: lightblue; color: black;")
             self.index = 0
+        cw = self.flashcardtekrar_pencere.centralwidget
+        cw.setFocus()
+
     def kolay(self,):
         self.kelime = self.kelimeler[self.sayac][0]
         self.zorluk = 1
         self.flashcardtekrar_pencere.pushButton_biliyom.setStyleSheet("background-color: lightgreen; color: black;")
         self.flashcardtekrar_pencere.pushButton_orta.setStyleSheet("")
         self.flashcardtekrar_pencere.pushButton_bilmiyom.setStyleSheet("")
+        self.sonraki()
     def orta(self,):
         self.kelime = self.kelimeler[self.sayac][0]
         self.zorluk = 2
         self.flashcardtekrar_pencere.pushButton_biliyom.setStyleSheet("")
         self.flashcardtekrar_pencere.pushButton_orta.setStyleSheet("background-color: lightgreen; color: black;")
         self.flashcardtekrar_pencere.pushButton_bilmiyom.setStyleSheet("")
+        self.sonraki()
     def zor(self,):
         self.kelime = self.kelimeler[self.sayac][0]
         self.zorluk = 3
         self.flashcardtekrar_pencere.pushButton_biliyom.setStyleSheet("")
         self.flashcardtekrar_pencere.pushButton_orta.setStyleSheet("")
         self.flashcardtekrar_pencere.pushButton_bilmiyom.setStyleSheet("background-color: lightgreen; color: black;")
+        self.sonraki()

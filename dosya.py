@@ -36,9 +36,19 @@ class dosyapencere(QMainWindow):
         self.close() 
     def sil(self, ):
         if hasattr(self, 'selected_file') and self.selected_file is not None:
-          self.db.dosyasil(self.selected_file)
-          self.load_files()
-          QMessageBox.information(self, "Başarılı", f"'{self.selected_file}' silindi!")
+          reply = QMessageBox.question(
+             self,
+             "Dosya Silme Onayı",
+             f"'{self.selected_file}' dosyasını silmek istediğinizden emin misiniz?",
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.No
+          )
+          if reply == QMessageBox.Yes:
+             self.db.dosyasil(self.selected_file)
+             self.load_files()
+             QMessageBox.information(self, "Başarılı", f"'{self.selected_file}' silindi!")
+          else:
+             QMessageBox.information(self, "İptal Edildi", "Dosya silme işlemi iptal edildi.")
         else:
           QMessageBox.warning(self, "Hata", "Lütfen silmek için bir dosya seçin!")
     def load_files(self):

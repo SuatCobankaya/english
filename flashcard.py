@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 from ui_flashcard import Ui_MainWindow
 from veritabani import database
-
+from PyQt5.QtCore import Qt,QEvent
 class flashcardpencere(QMainWindow):  
     def __init__(self,kelimeler):
         super().__init__()
@@ -12,7 +12,7 @@ class flashcardpencere(QMainWindow):
         self.db = database()
         self.flashcard_pencere.pushButton_geri.clicked.connect(self.geri)
         self.flashcard_pencere.pushButton_anasayfa.clicked.connect(self.anasayfa)
-        self.flashcard_pencere.pushButton_kelime.clicked.connect(self.kelime)
+        self.flashcard_pencere.pushButton_kelime.clicked.connect(self.cevir)
         self.flashcard_pencere.pushButton_sonraki.clicked.connect(self.sonraki)
         self.flashcard_pencere.pushButton_onceki.clicked.connect(self.onceki)
         self.flashcard_pencere.pushButton_biliyom.clicked.connect(self.kolay)
@@ -26,6 +26,36 @@ class flashcardpencere(QMainWindow):
         self.kelime = None
         self.flashcard_pencere.progressBar.setRange(0, len(self.kelimeler)-1)
         self.flashcard_pencere.progressBar.setValue(self.sayac)
+        cw = self.flashcard_pencere.centralwidget
+        cw.installEventFilter(self)
+        cw.setFocusPolicy(Qt.StrongFocus)
+        cw.setFocus()
+
+    def eventFilter(self, obj, event):
+        from PyQt5.QtCore import QEvent
+        if obj is self.flashcard_pencere.centralwidget and event.type() == QEvent.KeyPress:
+            key = event.key()
+            if key == Qt.Key_Right:
+                self.kolay()
+                return True
+            elif key == Qt.Key_Down:
+                self.orta()
+                return True
+            elif key == Qt.Key_Left:
+                self.zor()
+                return True
+            elif key == Qt.Key_Space:
+                self.cevir()
+                return True
+            elif key == Qt.Key_Escape:
+                self.geri()
+                return True
+            elif key == Qt.Key_A:
+                self.onceki()
+                return True
+        
+        
+        return super().eventFilter(obj, event)
         
     def geri(self, ):
         from anasayfa import anapencere
@@ -76,7 +106,7 @@ class flashcardpencere(QMainWindow):
             else:
                 QMessageBox.warning(self, "Hata", "Bir Zorluk Değeri Girin!")
 
-    def kelime(self,):
+    def cevir(self,):
         current_index = self.index
 
         if current_index == 0:
@@ -87,6 +117,8 @@ class flashcardpencere(QMainWindow):
             self.flashcard_pencere.pushButton_kelime.setText(self.kelimeler[self.sayac][0])  
             self.flashcard_pencere.pushButton_kelime.setStyleSheet("background-color: lightblue; color: black;")
             self.index = 0
+        cw = self.flashcard_pencere.centralwidget
+        cw.setFocus()
 
     def kolay(self,):
         self.kelime = self.kelimeler[self.sayac][0]
@@ -94,15 +126,21 @@ class flashcardpencere(QMainWindow):
         self.flashcard_pencere.pushButton_biliyom.setStyleSheet("background-color: lightgreen; color: black;")
         self.flashcard_pencere.pushButton_orta.setStyleSheet("")
         self.flashcard_pencere.pushButton_bilmiyom.setStyleSheet("")
+       
+        self.sonraki()
     def orta(self,):
         self.kelime = self.kelimeler[self.sayac][0]
         self.zorluk = 2
         self.flashcard_pencere.pushButton_biliyom.setStyleSheet("")
         self.flashcard_pencere.pushButton_orta.setStyleSheet("background-color: lightgreen; color: black;")
         self.flashcard_pencere.pushButton_bilmiyom.setStyleSheet("")
+        self.sonraki()
+        
     def zor(self,):
         self.kelime = self.kelimeler[self.sayac][0]
         self.zorluk = 3
         self.flashcard_pencere.pushButton_biliyom.setStyleSheet("")
         self.flashcard_pencere.pushButton_orta.setStyleSheet("")
         self.flashcard_pencere.pushButton_bilmiyom.setStyleSheet("background-color: lightgreen; color: black;")
+        
+        self.sonraki()
