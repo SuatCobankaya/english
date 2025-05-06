@@ -4,6 +4,7 @@ from veritabani import database
 import random
 import json
 from datetime import date
+from PyQt5.QtCore import Qt
 
 class testpencere(QMainWindow):  
     def __init__(self, kelimeler):
@@ -30,6 +31,30 @@ class testpencere(QMainWindow):
         self.yanlissayisi = 0
         self.dogru = []
         self.yanlis = []
+        cw = self.test_pencere.centralwidget
+        cw.installEventFilter(self)
+        cw.setFocusPolicy(Qt.StrongFocus)
+        cw.setFocus()
+
+    def eventFilter(self, obj, event):
+        from PyQt5.QtCore import QEvent
+        if obj is self.test_pencere.centralwidget and event.type() == QEvent.KeyPress:
+            key = event.key()
+            if key == Qt.Key_D:
+                self.sonrakisoru()
+                return True
+            elif key == Qt.Key_A:
+                self.oncekisoru()
+                return True
+            elif key == Qt.Key_Left:
+                self.oncekisoru()
+                return True
+            elif key == Qt.Key_Right:
+                self.sonrakisoru()
+                return True
+        
+        
+        return super().eventFilter(obj, event)
 
     def geri(self):
         from anasayfa import anapencere
@@ -52,6 +77,7 @@ class testpencere(QMainWindow):
             sonuc += satir.strip()
             return sonuc
         return metin
+        
 
     def soruolustur(self):
         if self.soru_index >= len(self.kelimeler):
@@ -122,6 +148,8 @@ class testpencere(QMainWindow):
         self.yuzdelik = self.asildogru / 16 * 100
         for b in butonlar:
             b.setEnabled(False)
+        cw = self.test_pencere.centralwidget
+        cw.setFocus()
 
     def sonrakisoru(self):
         self.soru_index += 1
