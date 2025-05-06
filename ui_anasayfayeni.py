@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addItem(spacerItem)
 
         top_button_font = QtGui.QFont()
-        top_button_font.setPointSize(25)  # Artırıldı
+        top_button_font.setPointSize(20)  # Artırıldı
 
         self.pushButton_dosya = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
@@ -150,8 +150,8 @@ class Ui_MainWindow(object):
         self.pushButton_eslestirme.setText(_translate("MainWindow", "Eşleştirme"))
         self.pushButton_kart.setText(_translate("MainWindow", "Kelime Kartları"))
         self.pushButton_test.setText(_translate("MainWindow", "Test"))
-        self.pushButton_kaydet.setText(_translate("MainWindow", "Tekrar Kelime"))
-        self.pushButton_yedekle.setText(_translate("MainWindow", "  Yeni Kelime  "))
+        self.pushButton_kaydet.setText(_translate("MainWindow", "  Yeni Kelime  "))
+        self.pushButton_yedekle.setText(_translate("MainWindow", "Tekrar Kelime"))
 
 if __name__ == "__main__":
     import sys

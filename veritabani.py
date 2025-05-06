@@ -209,3 +209,73 @@ class database:
         self.cursor.execute("DELETE FROM WORDS WHERE EnglishWord = ? AND FileId = ?", (kelime, dosya_id))
         self.con.commit()
         self.baglantikapat()
+    
+    def random16tekrar(self, sayi):
+        kontrol = 0
+        tekrarsayaci = 1
+        tum2kelimeler = []
+        tum3kelimeler = []
+        kalan = sayi % 2
+        if kalan == 1:
+            yarim3 = (sayi // 2) + 1
+        else:
+            yarim3 = sayi // 2
+        yarim2 = sayi // 2
+        self.baglantiac()
+        self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS WHERE zorluk = ?", (2,))
+        zorluk2 = self.cursor.fetchall()
+        sayi2 = len(zorluk2)
+        self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS WHERE zorluk = ?", (3,))
+        zorluk3 = self.cursor.fetchall()
+        sayi3 = len(zorluk3)
+        if sayi2 < yarim2:
+            yarim3 = yarim3 + (yarim2 - sayi2)
+            yarim2 = sayi2
+        elif sayi3 < yarim3:
+            yarim2 = yarim2 + (yarim3 - sayi3)
+            yarim3 = sayi3
+        while kontrol == 0:
+            self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS WHERE zorluk = ? AND tekrar = ?", (2, tekrarsayaci))
+            zorluk2 = self.cursor.fetchall()
+            kosul = len(zorluk2) + len(tum2kelimeler)
+            if kosul >= yarim2:
+                rastgele = yarim2 - len(tum2kelimeler)
+                if rastgele != 0:
+                    tum2kelimeler = tum2kelimeler + random.sample(zorluk2, rastgele)
+                else:
+                    tum2kelimeler = tum2kelimeler + zorluk2
+                kontrol = 1
+            else:
+                tum2kelimeler = tum2kelimeler + zorluk2
+                tekrarsayaci = tekrarsayaci + 1
+        kontrol = 0
+        tekrarsayaci = 1
+        while kontrol == 0:
+            self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS WHERE zorluk = ? AND tekrar = ?", (3, tekrarsayaci))
+            zorluk3 = self.cursor.fetchall()
+            kosul = len(zorluk3) + len(tum3kelimeler)
+            if kosul >= yarim3:
+                rastgele = yarim3 - len(tum3kelimeler)
+                if rastgele != 0:
+                    tum3kelimeler = tum3kelimeler + random.sample(zorluk3, rastgele)
+                else:
+                    tum3kelimeler = tum3kelimeler + zorluk3
+                kontrol = 1
+            else:
+                tum3kelimeler = tum3kelimeler + zorluk3
+                tekrarsayaci = tekrarsayaci + 1
+        self.baglantikapat()
+        tumkelimeler = tum2kelimeler + tum3kelimeler
+        return tumkelimeler
+    
+    def tekrarkelimevarmi(self,):
+        db = database()
+        self.baglantiac()
+        self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS WHERE zorluk = ?", (2,))
+        zorluk2 = self.cursor.fetchall()
+        sayi2 = len(zorluk2)
+        self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS WHERE zorluk = ?", (3,))
+        zorluk3 = self.cursor.fetchall()
+        sayi3 = len(zorluk3)
+        self.baglantikapat()
+        return sayi2 + sayi3

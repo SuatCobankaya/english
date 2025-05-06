@@ -20,7 +20,7 @@ class flashcardtekrarpencere(QMainWindow):
         self.flashcardtekrar_pencere.pushButton_orta.clicked.connect(self.orta)
         self.flashcardtekrar_pencere.pushButton_bilmiyom.clicked.connect(self.zor)
         self.setCentralWidget(self.flashcardtekrar_pencere.centralwidget) 
-        self.flashcardtekrar_pencere.pushButton_kelime.setText(kelimeler[0][0])
+        self.flashcardtekrar_pencere.pushButton_kelime.setText(self.kelimeyi_sigdir(self.kelimeler[0][0]))
         self.flashcardtekrar_pencere.pushButton_kelime.setStyleSheet("background-color: lightblue; color: black;")
         self.index = 0
         self.sayac = 0
@@ -78,7 +78,7 @@ class flashcardtekrarpencere(QMainWindow):
             self.flashcardtekrar_pencere.pushButton_bilmiyom.setStyleSheet("")
             self.sayac = self.sayac - 1
             self.flashcardtekrar_pencere.progressBar.setValue(self.sayac)
-            self.flashcardtekrar_pencere.pushButton_kelime.setText(self.kelimeler[self.sayac][0])
+            self.flashcardtekrar_pencere.pushButton_kelime.setText(self.kelimeyi_sigdir(self.kelimeler[self.sayac][0]))
             self.flashcardtekrar_pencere.pushButton_kelime.setStyleSheet("background-color: lightblue; color: black;")
             self.index = 0
     def sonraki(self,):
@@ -102,7 +102,7 @@ class flashcardtekrarpencere(QMainWindow):
                 self.flashcardtekrar_pencere.pushButton_bilmiyom.setStyleSheet("")
                 self.sayac = self.sayac + 1
                 self.flashcardtekrar_pencere.progressBar.setValue(self.sayac)
-                self.flashcardtekrar_pencere.pushButton_kelime.setText(self.kelimeler[self.sayac][0])
+                self.flashcardtekrar_pencere.pushButton_kelime.setText(self.kelimeyi_sigdir(self.kelimeler[self.sayac][0]))
                 self.flashcardtekrar_pencere.pushButton_kelime.setStyleSheet("background-color: lightblue; color: black;")
                 self.index = 0
             else:
@@ -112,11 +112,11 @@ class flashcardtekrarpencere(QMainWindow):
         current_index = self.index
 
         if current_index == 0:
-            self.flashcardtekrar_pencere.pushButton_kelime.setText(self.kelimeler[self.sayac][1])
-            self.flashcardtekrar_pencere.pushButton_kelime.setStyleSheet("background-color: orange; color: white;")
+            self.flashcardtekrar_pencere.pushButton_kelime.setText(self.kelimeyi_sigdir(self.kelimeler[self.sayac][1]))
+            self.flashcardtekrar_pencere.pushButton_kelime.setStyleSheet("background-color: lightgreen; color: black;")
             self.index = 1
         else:
-            self.flashcardtekrar_pencere.pushButton_kelime.setText(self.kelimeler[self.sayac][0])  
+            self.flashcardtekrar_pencere.pushButton_kelime.setText(self.kelimeyi_sigdir(self.kelimeler[self.sayac][0]))  
             self.flashcardtekrar_pencere.pushButton_kelime.setStyleSheet("background-color: lightblue; color: black;")
             self.index = 0
         cw = self.flashcardtekrar_pencere.centralwidget
@@ -143,3 +143,16 @@ class flashcardtekrarpencere(QMainWindow):
         self.flashcardtekrar_pencere.pushButton_orta.setStyleSheet("")
         self.flashcardtekrar_pencere.pushButton_bilmiyom.setStyleSheet("background-color: lightgreen; color: black;")
         self.sonraki()
+    def kelimeyi_sigdir(self, kelime, max_satir_uzunlugu=20):
+        kelimeler = kelime.split()
+        satirlar = []
+        satir = ""
+        for k in kelimeler:
+            if len(satir) + len(k) + 1 <= max_satir_uzunlugu:
+                satir += (" " if satir else "") + k
+            else:
+                satirlar.append(satir)
+                satir = k
+        if satir:
+            satirlar.append(satir)
+        return '\n'.join(satirlar)

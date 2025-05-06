@@ -53,17 +53,23 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.horizontalLayout.setAlignment(QtCore.Qt.AlignCenter)  
 
+        top_button_font = QtGui.QFont()
+        top_button_font.setPointSize(20)
+
         self.pushButton_bilmiyom = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_bilmiyom.setFont(top_button_font)
         self.pushButton_bilmiyom.setDefault(True)
         self.pushButton_bilmiyom.setObjectName("pushButton_bilmiyom")
         self.horizontalLayout.addWidget(self.pushButton_bilmiyom)
 
         self.pushButton_orta = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_orta.setFont(top_button_font)
         self.pushButton_orta.setDefault(True)
         self.pushButton_orta.setObjectName("pushButton_orta")
         self.horizontalLayout.addWidget(self.pushButton_orta)
 
         self.pushButton_biliyom = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_biliyom.setFont(top_button_font)
         self.pushButton_biliyom.setDefault(True)
         self.pushButton_biliyom.setObjectName("pushButton_biliyom")
         self.horizontalLayout.addWidget(self.pushButton_biliyom)
@@ -74,6 +80,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
         self.pushButton_onceki = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_onceki.setFont(top_button_font)
         self.pushButton_onceki.setDefault(True)
         self.pushButton_onceki.setObjectName("pushButton_onceki")
         self.horizontalLayout_2.addWidget(self.pushButton_onceki)
@@ -84,6 +91,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.progressBar)
 
         self.pushButton_sonraki = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_sonraki.setFont(top_button_font)
         self.pushButton_sonraki.setDefault(True)
         self.pushButton_sonraki.setObjectName("pushButton_sonraki")
         self.horizontalLayout_2.addWidget(self.pushButton_sonraki)
@@ -117,8 +125,8 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Kelime Uygulaması"))
         self.pushButton_kelime.setText(_translate("MainWindow", "kelime"))
         self.pushButton_bilmiyom.setText(_translate("MainWindow", "Bilmiyorum"))
-        self.pushButton_orta.setText(_translate("MainWindow", "Orta"))
-        self.pushButton_biliyom.setText(_translate("MainWindow", "Biliyorum"))
+        self.pushButton_orta.setText(_translate("MainWindow", "      Orta      "))
+        self.pushButton_biliyom.setText(_translate("MainWindow", "  Biliyorum  "))
         self.pushButton_onceki.setText(_translate("MainWindow", "Önceki"))
         self.pushButton_sonraki.setText(_translate("MainWindow", "Sonraki"))
 

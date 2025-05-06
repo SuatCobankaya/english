@@ -40,9 +40,10 @@ class anapencere(QMainWindow):
         self.ana_pencere.pushButton_istatislik.clicked.connect(self.istatislik)
         self.ana_pencere.pushButton_kart.clicked.connect(self.kart)
         self.ana_pencere.pushButton_kaydet.clicked.connect(self.yenile)
+        self.ana_pencere.pushButton_yedekle.clicked.connect(self.tekrarla)
         self.ana_pencere.pushButton_test.clicked.connect(self.test)
         self.setCentralWidget(self.ana_pencere.centralwidget)
-        self.showMaximized()
+
         
 
     def ara(self):
@@ -83,15 +84,30 @@ class anapencere(QMainWindow):
 
     def yenile(self):
         self.kelimeler = self.db.randomtüm(16)
+        if len(self.kelimeler) < 16:
+            QMessageBox.warning(self, "Yetersiz Kelime", "yeterli kelime yok (en az 16 gerekli).")
+            return
         self.db.baglantiac()
         self.db.cursor.execute("DELETE FROM random20")
         for kelime, anlam in self.kelimeler:
                 self.db.cursor.execute("INSERT INTO random20 (kelime, anlam) VALUES (?, ?)", (kelime, anlam))
         self.db.con.commit()
         self.db.baglantikapat()
+        QMessageBox.information(self, "Yenilendi", "Kelimeler Güncellendi")
 
-
-        
+    def tekrarla(self):
+        if self.db.tekrarkelimevarmi() < 16:
+            QMessageBox.warning(self, "Yetersiz Kelime", "Tekrar için yeterli kelime yok (en az 16 gerekli).")
+            return
+        self.kelimeler = self.db.random16tekrar(16)
+        self.db.baglantiac()
+        self.db.cursor.execute("DELETE FROM random20")
+        for kelime, anlam in self.kelimeler:
+                self.db.cursor.execute("INSERT INTO random20 (kelime, anlam) VALUES (?, ?)", (kelime, anlam))
+        self.db.con.commit()
+        self.db.baglantikapat()
+        QMessageBox.information(self, "Yenilendi", "Kelimeler Güncellendi")
+   
     def closeEvent(self, event):
         self.db.baglantiac()
         self.db.cursor.execute("DELETE FROM random20")
