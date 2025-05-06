@@ -19,8 +19,6 @@ class yenidosyapencere(QMainWindow):
         from dosya import dosyapencere
         self.close()
         self.giris = dosyapencere()
-        from anasayfa import apply_theme
-        apply_theme(self.giris)
         self.giris.show()
 
     def anasayfa(self):
