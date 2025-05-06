@@ -85,7 +85,7 @@ class flashcardtekrarpencere(QMainWindow):
         if self.sayac == self.boyut-1:
             if self.kelime is not None:
                 self.db.algo(self.zorluk,self.kelime)
-                QMessageBox.information(self, "Başarılı", " kelimeler bitti. ")
+                QMessageBox.information(self, "Başarılı", " Kelimeleri Başarıyla Tamamladınız! ")
                 from dosya import dosyapencere
                 self.giris = dosyapencere()
                 self.giris.show()

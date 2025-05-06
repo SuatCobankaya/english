@@ -126,10 +126,41 @@ class Ui_MainWindow(object):
             gridline-color: #444444;
             background-color: #2e2e2e;
             alternate-background-color: #3a3a3a;
+            color: white;
+            selection-background-color: #44475a;
+            selection-color: white;
+        }
+        QTableWidget::item {
+            background-color: #2e2e2e;
+            padding: 4px;
         }
         QTableWidget QTableCornerButton::section {
             background-color: #3c3c3c;
             border: 1px solid #555;
+        }
+
+        QTabWidget::pane {
+            border: 1px solid #555;
+            background: #2e2e2e;
+        }
+
+        QTabBar::tab {
+            background: #3c3c3c;
+            color: white;
+            padding: 8px;
+            border: 1px solid #555;
+            border-bottom: none;
+            min-width: 100px;
+        }
+
+        QTabBar::tab:selected {
+            background: #2e2e2e;
+            border-bottom: 1px solid #2e2e2e;
+            font-weight: bold;
+        }
+
+        QTabBar::tab:!selected {
+            margin-top: 2px;
         }
         """
         MainWindow.setStyleSheet(dark_stylesheet)
