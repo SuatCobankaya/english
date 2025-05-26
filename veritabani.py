@@ -38,7 +38,7 @@ class database:
 
     def randomyeni(self, dosyaid, sayi):
         self.baglantiac()
-        self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS WHERE FileId = ?", (dosyaid,))
+        self.cursor.execute("SELECT EnglishWord, Meaning FROM WORDS WHERE FileId = ? AND tekrar IS NULL", (dosyaid,))
         rastgele = self.cursor.fetchall()
         self.baglantikapat()
         if len(rastgele) < sayi:
