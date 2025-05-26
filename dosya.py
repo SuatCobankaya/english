@@ -103,9 +103,23 @@ class dosyapencere(QMainWindow):
                 widget.setStyleSheet("background-color: #44475a; color: white; border-radius: 5px;")
 
     def view_file(self,filename):
+        id = self.db.dosyaidgetir(filename)
+        self.db.baglantiac()
+        self.db.cursor.execute("SELECT Meaning FROM WORDS WHERE FileID = ? AND zorluk =?", (id,1))
+        biliyom = self.db.cursor.fetchall()
+        self.db.cursor.execute("SELECT Meaning FROM WORDS WHERE FileID = ? AND zorluk =?", (id,3))
+        bilmiyom = self.db.cursor.fetchall()
+        self.db.cursor.execute("SELECT Meaning FROM WORDS WHERE FileID = ? AND zorluk =?", (id,2))
+        orta = self.db.cursor.fetchall()
+        self.db.baglantikapat()
+
+        biliyom = len(biliyom)
+        bilmiyom = len(bilmiyom)
+        orta = len(orta)
+
         from dosyaici import dosyaicipencere
         self.giris = dosyaicipencere()
-        self.giris.dosyaismial(filename)
+        self.giris.dosyaismial(filename,biliyom,orta,bilmiyom)
         self.giris.show()
         self.close()
 

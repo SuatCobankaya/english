@@ -19,7 +19,10 @@ class dosyaicipencere(QMainWindow):
         self.dosyaici_pencere.pushButton_goruntule.clicked.connect(self.goruntule)
         self.setCentralWidget(self.dosyaici_pencere.centralwidget) 
 
-    def dosyaismial(self, isim):
+    def dosyaismial(self, isim,biliyom,orta,bilmiyom):
+        self.dosyaici_pencere.checkBox_biliyom.setText("Biliyorum ("+ str(biliyom) +")")
+        self.dosyaici_pencere.checkBox_orta.setText("Orta ("+ str(orta) +")")
+        self.dosyaici_pencere.checkBox_bilmiyom.setText("Biliyorum ("+ str(bilmiyom) +")")
         self.filename = isim
         self.kelimeleriyukle()
 
